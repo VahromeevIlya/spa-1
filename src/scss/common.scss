@@ -1,0 +1,333 @@
+// Заголовки, общие БЄМ блоки и проче...
+//?========================================================================================================================================================
+//*Анимации
+@keyframes slideInDown {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+@keyframes opacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes timer {
+	from {
+		stroke-dashoffset: 125.66368;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes pulse-me {
+	0% {
+		transform: scale(0.5);
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.56;
+	}
+	70% {
+		opacity: 0.09;
+	}
+	100% {
+		transform: scale(2.32);
+		opacity: 0;
+	}
+}
+//?========================================================================================================================================================
+.visually-hidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+	visibility: hidden;
+}
+._title {
+	font-family: DaysOne;
+	line-height: math.div(46, 36);
+	color: $strong;
+	@include adaptiveValue("font-size", 36, 22, $containerWidth, $minWidth, 1);
+}
+.text {
+	h3 {
+		font-weight: 500;
+		line-height: 120%;
+		color: $strong;
+		margin-bottom: rem(21);
+		@include adaptiveValue("font-size", 24, 20, $containerWidth, $minWidth, 1);
+	}
+	h4 {
+		font-weight: 500;
+		line-height: 120%;
+		color: $strong;
+		margin-bottom: rem(16);
+		@include adaptiveValue("font-size", 22, 18, $containerWidth, $minWidth, 1);
+	}
+	span {
+		color: $green;
+	}
+	p {
+		line-height: 144%;
+		&:not(:last-child) {
+			margin-bottom: rem(16);
+		}
+		@include adaptiveValue("font-size", 16, 14, $containerWidth, $minWidth, 1);
+	}
+	ul {
+		display: grid;
+		gap: rem(16);
+		&:not(:last-child) {
+			@include adaptiveValue("margin-bottom", 60, 30, $containerWidth, $minWidth, 1);
+		}
+		li {
+			display: grid;
+			grid-template-columns: auto 1fr;
+			gap: rem(13);
+			align-self: start;
+			&::before {
+				content: "—";
+				transform: translateY(rem(3));
+				color: $green;
+			}
+		}
+	}
+}
+.headline {
+	&--light {
+		.headline__title {
+			color: white;
+		}
+	}
+	&__title {
+		font-family: "DaysOne";
+		line-height: math.div(41, 32);
+		text-align: center;
+		color: $strong;
+		@include adaptiveValue("font-size", 32, 22, $containerWidth, $minWidth, 1);
+		&:not(:last-child) {
+			margin-bottom: rem(9);
+		}
+	}
+	&__subtitle {
+		line-height: 144%;
+		text-align: center;
+		color: #a6a6a6;
+	}
+}
+.arrow {
+	pointer-events: auto;
+	&::before {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) translateX(rem(1));
+		font-size: rem(12);
+	}
+	&.swiper-button-disabled {
+		svg {
+			opacity: 0.5;
+		}
+	}
+	&--prev {
+		transform: rotate(-180deg);
+	}
+}
+.arrows {
+	pointer-events: none;
+	display: grid;
+	grid-template-columns: repeat(2, rem(40));
+	gap: rem(12);
+}
+.timer {
+	display: inline-block;
+	position: relative;
+	flex: 0 0 auto;
+	width: rem(40);
+	height: rem(40);
+	svg {
+		width: rem(40);
+		height: rem(40);
+		.loaded & {
+			transition: opacity 0.3s ease 0s;
+		}
+	}
+	&__background {
+		fill: none;
+		stroke-width: rem(2);
+		stroke: transparent;
+	}
+	&__progress {
+		fill: none;
+		stroke-width: rem(2);
+		stroke: $green;
+		stroke-linecap: round;
+		stroke-dasharray: 125.66368;
+		transform: rotate(-90deg);
+		transform-origin: 50% 50%;
+	}
+}
+.pulse-box {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: rem(50);
+	height: rem(50);
+	box-shadow: 0 0 rem(8) rgba(0, 0, 0, 0.13);
+	border-radius: 50%;
+	&::before {
+		@extend %noselect;
+		@extend %ic;
+		content: "\e902";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: $green;
+		font-weight: 600;
+		font-size: rem(22);
+	}
+	svg.pulse-svg {
+		overflow: visible;
+		.first-circle {
+			fill: white;
+			transform: scale(0.5);
+			transform-origin: center center;
+			animation: pulse-me 4.5s linear infinite;
+			-webkit-filter: drop-shadow(0 0 rem(15) rgba(0, 0, 0, 0.12));
+			filter: drop-shadow(0 0 rem(15) rgba(0, 0, 0, 0.12));
+		}
+		.second-circle {
+			@extend .first-circle;
+			animation-delay: 1.5s;
+		}
+		.third-circle {
+			@extend .first-circle;
+			animation-delay: 3s;
+		}
+	}
+}
+.smoke {
+	position: relative;
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		pointer-events: none;
+		top: 0;
+		height: rem(60);
+		width: rem(60);
+		opacity: 0;
+		.loaded & {
+			transition: opacity 0.3s ease 0s;
+		}
+		@media (min-width: $tablet) {
+			display: none;
+		}
+	}
+	&::before {
+		left: rem(-24);
+		background-image: linear-gradient(270deg, hsla(0, 0%, 100%, 0), white);
+	}
+	&::after {
+		right: rem(-24);
+		background-image: linear-gradient(270deg, white, hsla(0, 0%, 100%, 0));
+	}
+	&.left-shadow {
+		&::before {
+			opacity: 1;
+		}
+	}
+	&.right-shadow {
+		&::after {
+			opacity: 1;
+		}
+	}
+}
+._lazy,
+.swiper-lazy {
+	background: url("../../public/img/loading.svg") center / max(20%, 50px) no-repeat;
+	&[src],
+	&[srcset] {
+		background: none;
+	}
+}
+.leaf {
+	background: none;
+}
+.leafs {
+	@media (max-width: $tablet) {
+		display: none;
+	}
+	&__item {
+		position: absolute;
+		z-index: 10;
+		&--1 {
+			top: rem(800);
+			left: 55%;
+		}
+		&--2 {
+			left: 6%;
+			top: rem(1380);
+		}
+		&--3 {
+			right: 0;
+			top: rem(2100);
+		}
+		&--4 {
+			left: 30%;
+			top: rem(2740);
+		}
+		&--5 {
+			left: 28%;
+			top: rem(4000);
+		}
+		&--6 {
+			right: 0;
+			top: rem(5100);
+		}
+		&--7 {
+			left: 5%;
+			top: rem(5555);
+		}
+		&--8 {
+			right: 2%;
+			top: rem(6700);
+			@media (max-width: $pc) {
+				top: rem(6200);
+			}
+		}
+		&--9 {
+			left: 0;
+			top: rem(7040);
+			@media (max-width: $pc) {
+				top: rem(6500);
+			}
+		}
+	}
+}
+//?========================================================================================================================================================
+.grecaptcha-badge {
+	display: none !important;
+	clip: rect(0 0 0 0) !important;
+	clip-path: inset(50%) !important;
+	height: 1px !important;
+	overflow: hidden !important;
+	position: absolute !important;
+	white-space: nowrap !important;
+	width: 1px !important;
+	visibility: hidden !important;
+}
+.screen-reader-response {
+	display: none !important;
+}

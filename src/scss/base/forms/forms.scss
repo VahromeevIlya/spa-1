@@ -1,0 +1,143 @@
+//<FORM>
+// Снипет (HTML):
+.form {
+	&--dark {
+		.input {
+			background: #F5F5F5;
+			border-color: #F5F5F5;
+			&::placeholder {
+				color: $mainColor;
+			}
+		}
+	}
+	&__row {
+		display: grid;
+		gap: rem(16);
+		@include adaptiveValue("margin-bottom", 45, 30, $containerWidth, $minWidth, 1);
+	}
+	&__column {
+	}
+	&__line {
+		position: relative;
+	}
+	&__input {
+	}
+	&__button {
+		@include adaptiveValue("margin-bottom", 24, 30, $containerWidth, $minWidth, 1);
+		button {
+			width: 100%;
+		}
+	}
+	&__error {
+	}
+	&__headline {
+		@include adaptiveValue("margin-bottom", 38, 30, $containerWidth, $minWidth, 1);
+	}
+	&__title {
+		
+	}
+	&__subtitle {
+		
+	}
+	&__agreement {
+		font-size: rem(10);
+		line-height: 144%;
+		text-align: center;
+		color: #a6a6a6;
+		a {
+			text-decoration: underline;
+			color: $red;
+		}
+	}
+}
+.wpcf7-form {
+	&.submitting,
+	&.resetting
+	 {
+		opacity: 0.5;
+		pointer-events: none;
+		.wpcf7-response-output {
+			opacity: 0;
+			font-size: rem(0);
+		}
+	}
+	&.sent {
+		.wpcf7-response-output {
+			opacity: 0;
+			font-size: rem(0);
+		}
+	}
+	.wpcf7-response-output {
+		font-size: rem(14);
+		text-align: center;
+		margin-top: rem(16);
+		line-height: 1.2;
+	}
+	&.invalid,
+	&.spam {
+		.wpcf7-response-output {
+			color: $formError;
+			.popup & {
+				color: $formErrorPopup;
+			}
+		}
+	}
+	.wpcf7-form-control-wrap {
+		position: relative;
+		display: block;
+		.wpcf7-not-valid-tip {
+			position: absolute;
+			right: rem(16);
+			top: 50%;
+			transform: translateY(-50%);
+			font-size: 0;
+			&::after {
+				content: "\e905";
+				@extend %ic;
+				display: block;
+				font-size: rem(16);
+				color: $formError;
+				.popup & {
+					color: $formErrorPopup;
+				}
+			}
+		}
+	}
+	.info {
+		margin-bottom: rem(20);
+	}
+}
+
+//</FORM>
+
+// <BUTTONS>
+// Снипет (HTML): btn
+@import "button";
+
+// <INPUTS>
+// Снипет (HTML): inp
+@import "input";
+
+// <CHECK>
+// Снипет (HTML): chk
+@import "checkbox.scss";
+
+// <RADIO>
+// Снипет (HTML): opt
+// @import "radio";
+
+// <SELECT>
+// Снипет (HTML): sel
+// @import "select";
+
+// <RATING>
+// Снипет (HTML): rating
+// @import "rating";
+
+// <QUANTITY>
+// Снипет (HTML): qa
+// @import "quantity";
+
+// <RANGE>
+// Снипет (HTML):
+// @import "range";
