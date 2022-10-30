@@ -1,11 +1,43 @@
-import React from 'react'
+import { useCallback, useRef } from "react";
+import { AdaptiveStateType, Media } from "../../redux/adaptive/types";
+import Menu from "./Menu";
+import ButtonHeader from "./ButtonHeader";
 
-type HeaderProps = {}
+type HeaderProps = AdaptiveStateType;
 
-const Header = (props: HeaderProps) => {
-  return (
-	 <div>Header</div>
-  )
-}
+const Header = ({media}: HeaderProps) => {
+	const htmlRef = useRef(document.documentElement);
+	const toggleBurger = useCallback(() => {
+		htmlRef.current.classList.toggle("menu-open");
+	}, []);
+	return (
+		<header className="header" data-scroll="400">
+			<div className="header__wrapper" data-lp>
+				<div className="header__container">
+					<div className="header__grid">
+						<button 			onClick={toggleBurger} type="button" className="icon-menu">
+							<span></span>
+						</button>
+						<a href="" className="header__logo">
+							<img src="img/logo.svg" alt="Логотип" />
+						</a>
+						<div className="header__menu menu">
+							{media >= Media.DESKTOP && <Menu/>}
+						</div>
+						<div className="header__actions">
+							<a
+								href="tel:8 (4922) 42-12-83"
+								className="header__phone _icon-phone"
+							>
+								<span>8 (4922) 42-12-83</span>
+							</a>
+							{media > Media.MOBILE && <ButtonHeader/>}
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	);
+};
 
 export default Header;
