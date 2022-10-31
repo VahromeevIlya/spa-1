@@ -2,14 +2,19 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setMediaState } from "../redux/adaptive/slice";
 import { Media } from "../redux/adaptive/types";
+import { Outlet } from "react-router-dom";
+import { Header, Footer, MenuMobileDown, MenuMobileUp } from "../components";
 
-const Adaptive = ({ children }: any) => {
+
+type Props = {
+	media: number
+}
+
+const Adaptive = ({ media }: Props) => {
 	const dispatch = useDispatch();
-
 	const medias = Object.entries(Media).filter(
 		(item) => typeof item[1] === "number"
 	);
-
 	const updateMedia = useCallback((number: number) => {
 		dispatch(setMediaState(number));
 	}, []);
@@ -42,7 +47,17 @@ const Adaptive = ({ children }: any) => {
 		};
 	}, []);
 
-	return <div className="wrapper">{children}</div>;
+	return (
+		<div className="wrapper">
+			<Header media={media} />
+			<main className="page">
+				<MenuMobileUp media={media} />
+				<Outlet/>
+			</main>
+			<MenuMobileDown media={media} />
+			<Footer />
+		</div>
+	);
 };
 
 export default Adaptive;
