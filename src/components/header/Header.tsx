@@ -5,7 +5,7 @@ import ButtonHeader from "./ButtonHeader";
 
 type HeaderProps = AdaptiveStateType;
 
-const Header = ({media}: HeaderProps) => {
+const Header = ({ media }: HeaderProps) => {
 	const htmlRef = useRef(document.documentElement);
 	const toggleBurger = useCallback(() => {
 		htmlRef.current.classList.toggle("menu-open");
@@ -15,14 +15,18 @@ const Header = ({media}: HeaderProps) => {
 			<div className="header__wrapper" data-lp>
 				<div className="header__container">
 					<div className="header__grid">
-						<button 			onClick={toggleBurger} type="button" className="icon-menu">
+						<button
+							onClick={toggleBurger}
+							type="button"
+							className="icon-menu"
+						>
 							<span></span>
 						</button>
 						<a href="" className="header__logo">
 							<img src="img/logo.svg" alt="Логотип" />
 						</a>
 						<div className="header__menu menu">
-							{media >= Media.DESKTOP && <Menu/>}
+							{media >= Media.DESKTOP && <Menu />}
 						</div>
 						<div className="header__actions">
 							<a
@@ -31,7 +35,7 @@ const Header = ({media}: HeaderProps) => {
 							>
 								<span>8 (4922) 42-12-83</span>
 							</a>
-							{media > Media.MOBILE && <ButtonHeader/>}
+							{media > Media.MOBILE && <ButtonHeader />}
 						</div>
 					</div>
 				</div>
