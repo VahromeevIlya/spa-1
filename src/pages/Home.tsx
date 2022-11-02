@@ -1,5 +1,5 @@
 import React from 'react'
-import { Fullscreen } from '../components';
+import { About, Advantages, Fullscreen } from '../components';
 
 type Props = {}
 
@@ -7,6 +7,8 @@ const Home = (props: Props) => {
   return (
 	 <>
 	 	<Fullscreen/>
+		<About/>
+		<Advantages/>
 	 </>
   )
 }
