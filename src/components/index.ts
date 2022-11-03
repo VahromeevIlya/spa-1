@@ -5,3 +5,8 @@ export { default as MenuMobileDown } from "./MenuMobileDown";
 export { default as Fullscreen } from "./fullscreen/Fullscreen";
 export { default as About } from "./about/About";
 export { default as Advantages } from "./advantages/Advantages";
+export { default as Cost } from "./cost/Cost";
+export { default as Keep } from "./keep/Keep";
+export { default as Order } from "./order/Order";
+export { default as Team } from "./team/Team";
+export { default as Portfolio } from "./portfolio/Portfolio";
