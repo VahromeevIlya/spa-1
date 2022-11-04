@@ -10,3 +10,4 @@ export { default as Keep } from "./keep/Keep";
 export { default as Order } from "./order/Order";
 export { default as Team } from "./team/Team";
 export { default as Portfolio } from "./portfolio/Portfolio";
+export { default as Work } from "./work/Work";
