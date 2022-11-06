@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Lazy, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ButtonCircle from "../../common/ButtonCircle";
 import { mediaSize } from "../../redux/adaptive/selectors";
 import { Media } from "../../redux/adaptive/types";
 import TeamCard from "./TeamCard";
@@ -54,48 +55,12 @@ const Team = (props: Props) => {
 				<div className="team__grid">
 					<div className="team__top">
 						<h2 className="team__title _title">Наша команда</h2>
-						{media > Media.MOBILE_SMALL && <div
-							className="team__arrows arrows"
-						>
-							<button
-								type="button"
-								className="arrow arrow--prev  arrow--team _icon-arrow timer"
-							>
-								<svg>
-									<circle
-										className="timer__background"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-									<circle
-										className="timer__progress"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-								</svg>
-							</button>
-							<button
-								type="button"
-								className="arrow arrow--next arrow--team _icon-arrow timer"
-							>
-								<svg>
-									<circle
-										className="timer__background"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-									<circle
-										className="timer__progress"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-								</svg>
-							</button>
-						</div>}
+						{media > Media.MOBILE_SMALL && (
+							<div className="team__arrows arrows">
+								<ButtonCircle className="arrow arrow--prev  arrow--team _icon-arrow timer" />
+								<ButtonCircle className="arrow arrow--next arrow--team _icon-arrow timer" />
+							</div>
+						)}
 					</div>
 					<Swiper
 						modules={[Navigation, Pagination, Lazy]}
@@ -121,48 +86,12 @@ const Team = (props: Props) => {
 								</SwiperSlide>
 							);
 						})}
-						{media <= Media.MOBILE_SMALL && <div
-							className="team__arrows arrows"
-						>
-							<button
-								type="button"
-								className="arrow arrow--prev  arrow--team _icon-arrow timer"
-							>
-								<svg>
-									<circle
-										className="timer__background"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-									<circle
-										className="timer__progress"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-								</svg>
-							</button>
-							<button
-								type="button"
-								className="arrow arrow--next arrow--team _icon-arrow timer"
-							>
-								<svg>
-									<circle
-										className="timer__background"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-									<circle
-										className="timer__progress"
-										cx="20"
-										cy="20"
-										r="19"
-									></circle>
-								</svg>
-							</button>
-						</div>}
+						{media <= Media.MOBILE_SMALL && (
+							<div className="team__arrows arrows">
+								<ButtonCircle className="arrow arrow--prev  arrow--team _icon-arrow timer" />
+								<ButtonCircle className="arrow arrow--next arrow--team _icon-arrow timer" />
+							</div>
+						)}
 					</Swiper>
 				</div>
 			</div>

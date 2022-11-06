@@ -1,6 +1,7 @@
 import React from "react";
 import { EffectFade, Lazy, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import ButtonCircle from "../../common/ButtonCircle";
 import PortfolioInnerSlide from "./PortfolioInnerSlide";
 type Props = {};
 
@@ -95,44 +96,8 @@ const Portfolio = (props: Props) => {
 				<div className="portfolio__top">
 					<h2 className="portfolio__title _title">Портфолио</h2>
 					<div className="portfolio__arrows arrows">
-						<button
-							type="button"
-							className="arrow arrow--prev arrow--portfolio _icon-arrow timer"
-						>
-							<svg>
-								<circle
-									className="timer__background"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-								<circle
-									className="timer__progress"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-							</svg>
-						</button>
-						<button
-							type="button"
-							className="arrow arrow--next arrow--portfolio _icon-arrow timer"
-						>
-							<svg>
-								<circle
-									className="timer__background"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-								<circle
-									className="timer__progress"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-							</svg>
-						</button>
+						<ButtonCircle className="arrow arrow--prev arrow--portfolio _icon-arrow timer" />
+						<ButtonCircle className="arrow arrow--next arrow--portfolio _icon-arrow timer" />
 					</div>
 				</div>
 			</div>

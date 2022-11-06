@@ -1,6 +1,12 @@
 //<FORM>
 // Снипет (HTML):
 .form {
+	&.submitting,
+	&.resetting
+	 {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 	&--dark {
 		.input {
 			background: #F5F5F5;
@@ -107,9 +113,29 @@
 		margin-bottom: rem(20);
 	}
 }
-
+.wpcf7-not-valid-tip {
+	position: absolute;
+	right: rem(16);
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 0;
+	&::after {
+		content: "\e905";
+		@extend %ic;
+		display: block;
+		font-size: rem(16);
+		color: $formError;
+		.popup & {
+			color: $formErrorPopup;
+		}
+	}
+}
 //</FORM>
-
+.tippy-my {
+	color: white;
+	padding: rem(10);
+	background: red;
+}
 // <BUTTONS>
 // Снипет (HTML): btn
 @import "button";

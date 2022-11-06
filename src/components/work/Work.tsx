@@ -1,10 +1,13 @@
-import clsx from "clsx";
-import React, { useRef, useState } from "react";
-import { Autoplay, EffectFade, Lazy, Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Slider } from "../../@types/slider";
-import { isDesktop } from "../../utils/isDesktop";
-import WorkControls from "./WorkControls";
+import {
+	Autoplay,
+	EffectFade,
+	Lazy,
+	Navigation,
+	Pagination,
+	SwiperOptions,
+} from "swiper";
+import { SwiperSlide } from "swiper/react";
+import SliderWithControls from "../../common/SliderWithControls";
 import WorkSlide from "./WorkSlide";
 
 type Props = {};
@@ -71,88 +74,44 @@ const WorkSlides = [
 ];
 
 const Work = (props: Props) => {
-	const [arrowNextActive, setArrowNextActive] = useState("");
-	const [arrowNextHovered, setArrowNextHovered] = useState("");
-	const [total, setTotal] = useState<number | string>("02");
-	const [current, setCurrent] = useState<number | string>("01");
-	const swiperRef = useRef<Slider>(null);
+	const propsSwiper = {
+		modules: [Navigation, Pagination, EffectFade, Autoplay, Lazy],
+		slidesPerView: "auto",
+		spaceBetween: 50,
+		speed: 800,
+		effect: "fade",
+		observer: true,
+		observeParents: true,
+		autoHeight: true,
+		fadeEffect: { crossFade: true },
+		preloadImages: false,
+		lazy: { checkInView: true, loadOnTransitionStart: true },
+		navigation: {
+			nextEl: ".arrow--next",
+			prevEl: ".arrow--prev",
+		},
+		pagination: {
+			el: ".swiper-pagination",
+			type: "progressbar",
+		},
+		breakpoints: {
+			320: {
+				allowTouchMove: true,
+			},
+			768: {
+				allowTouchMove: false,
+			},
+		},
+	} as SwiperOptions;
 
-	let clazzNextButton = clsx(
-		"arrow arrow--next _icon-arrow timer",
-		arrowNextActive === "animating" && " animating",
-		arrowNextHovered === "hovered" && " hovered"
-	);
-
-	function formatFraction(number: number | string) {
-		return +number < 10 ? `0${number}` : number;
-	}
-	function autoplayStart(swiper: Slider) {
-		swiper?.autoplay.start();
-		setArrowNextHovered("");
-	}
-	function autoplayStop(swiper: Slider) {
-		swiper?.autoplay.stop();
-		setArrowNextHovered("hovered");
-	}
-	function handleSlideChange(swiper: Slider) {
-		if (swiper) {
-			let currentSlide = formatFraction(++swiper.realIndex);
-			setCurrent(currentSlide);
-		}
-	}
-	function updateCounter(swiper: Slider) {
-		if (swiper?.destroyed === true) return;
-		const number = formatFraction(swiper?.slides.length || 0);
-		setTotal(number);
-	}
 	return (
 		<section className="work">
 			<div className="work__container">
-				<Swiper 
-				onSwiper={(swiper) => {
-					swiperRef.current = swiper;
-				}}
-				modules={[Navigation, Pagination, EffectFade, Autoplay,Lazy]}
-				effect="fade"
-				fadeEffect={{
-					crossFade: true,
-				}}
-				autoplay={{
-					disableOnInteraction: false,
-					delay: 5000,
-				}}
-				observer={true}
-				observeParents={true}
-				slidesPerView="auto"
-				spaceBetween={30}
-				speed={800}
-				autoHeight={true}
-				preloadImages={false}
-				lazy={{
-					checkInView: true,
-					loadOnTransitionStart: true,
-				}}
-				navigation={{
-					nextEl: ".arrow--next",
-					prevEl: ".arrow--prev",
-				}}
-				pagination={{
-					el: ".swiper-pagination",
-					type: "progressbar",
-				}}
-
-				onInit={(swiper) => {
-					setArrowNextActive("animating");
-					updateCounter(swiper);
-					autoplayStart(swiper);
-				}}
-				onTransitionStart={() => setArrowNextActive("")}
-				onTransitionEnd={() => setArrowNextActive("animating")}
-				onSlideChange={(swiper) => handleSlideChange(swiper)}
-				onTouchStart={(swiper) => !isDesktop && autoplayStop(swiper)}
-				onTouchEnd={(swiper) => !isDesktop && autoplayStart(swiper)}
-
-				className="work__slider">
+				<SliderWithControls
+					className="work__slider"
+					controlsContainerClass="controls__shell"
+					swiperOption={propsSwiper}
+				>
 					{WorkSlides.map((obj, index) => {
 						return (
 							<SwiperSlide className="work__slide" key={index}>
@@ -160,15 +119,7 @@ const Work = (props: Props) => {
 							</SwiperSlide>
 						);
 					})}
-					<WorkControls 
-					isDesktop={isDesktop}
-					autoplayStop={autoplayStop}
-					autoplayStart={autoplayStart}
-					total={total}
-					current={current}
-					clazzNextButton={clazzNextButton}
-					/>
-				</Swiper>
+				</SliderWithControls>
 			</div>
 		</section>
 	);

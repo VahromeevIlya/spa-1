@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
+import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import clsx from "clsx";
+import Tippy from "@tippyjs/react";
+import Popup from "../popup/Popup";
+
+interface Values {
+	firstName: string;
+	phone: string;
+}
 type Props = {};
 
+const phoneRegExp =
+	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const SignupSchema = Yup.object().shape({
+	firstName: Yup.string()
+		.min(2, "Слишком короткое имя")
+		.required("Обязательное поле"),
+	phone: Yup.string()
+		.matches(phoneRegExp, "Не правильный номер телефона")
+		.required("Обязательное поле"),
+});
+
 const Order = (props: Props) => {
+	const [active, setActive] = useState(false);
+
 	return (
 		<section id="order" className="order">
 			<div className="order__image-ibg">
@@ -13,74 +36,129 @@ const Order = (props: Props) => {
 			</div>
 			<div className="order__container">
 				<div className="order__grid">
-					<form action="#" className="order__form form wpcf7-form invalid">
-						<div className="form__headline headline headline--light">
-							<h2 className="headline__title">Заказать котельную</h2>
+					<Formik
+						initialValues={{
+							firstName: "",
+							phone: "",
+						}}
+						validationSchema={SignupSchema}
+						onSubmit={(
+							values: Values,
+							{ setSubmitting }: FormikHelpers<Values>
+						) => {
+							setTimeout(() => {
+								setSubmitting(false);
+								setActive(true);
+								setTimeout(() => {
+									setActive(false);
+								},4000)
+							}, 1000);
+						}}
+					>
+						{({ errors, touched, isSubmitting }) => (
+							<Form
+								className={clsx(
+									"order__form form",
+									isSubmitting && "submitting"
+								)}
+							>
+								<div className="form__headline headline headline--light">
+									<h2 className="headline__title">
+										Заказать котельную
+									</h2>
+									<p className="headline__subtitle">
+										Оставьте свои контакты и наш менеджер свяжется с
+										Вами в ближайшее время
+									</p>
+								</div>
+								<div className="form__row">
+									<div className="form__line">
+										<Field
+											className={clsx(
+												"input",
+												errors.firstName &&
+													touched.firstName &&
+													"wpcf7-not-valid"
+											)}
+											name="firstName"
+											placeholder="Ваше имя*"
+										/>
+										<ErrorMessage name="firstName">
+											{(msg) => (
+												<Tippy className="tippy-my" content={msg}>
+													<button
+														type="button"
+														className="wpcf7-not-valid-tip"
+													></button>
+												</Tippy>
+											)}
+										</ErrorMessage>
+									</div>
+									<div className="form__line">
+										<Field
+											className={clsx(
+												"input",
+												errors.phone &&
+													touched.phone &&
+													"wpcf7-not-valid"
+											)}
+											type="tel"
+											name="phone"
+											placeholder="Номер телефона*"
+										/>
+										<ErrorMessage name="phone">
+											{(msg) => (
+												<Tippy className="tippy-my" content={msg}>
+													<button
+														type="button"
+														className="wpcf7-not-valid-tip"
+													></button>
+												</Tippy>
+											)}
+										</ErrorMessage>
+									</div>
+								</div>
+								<div className="form__button">
+									<button
+										type="submit"
+										className="button button--large"
+									>
+										Отправить
+									</button>
+								</div>
+								<div className="form__agreement">
+									Отправляя форму, Вы принимаете 
+									<a href="/" target="_blank">
+										условия пользовательского соглашения
+									</a>
+									и согласны с 
+									<a href="/" target="_blank">
+										политикой конфиденциальности
+									</a>
+									сайта
+								</div>
+							</Form>
+						)}
+					</Formik>
+					<Popup active={active} setActive={setActive}>
+						<div className="form__headline headline">
+							<h2 className="headline__title">Успешно!</h2>
 							<p className="headline__subtitle">
-								Оставьте свои контакты и наш менеджер свяжется с Вами в
-								ближайшее время
+								Спасибо за Ваше обращение. Менеджер свяжется с вами в
+								ближайшее время!
 							</p>
 						</div>
-						<div className="form__row">
-							<div className="form__line">
-								<span className="wpcf7-form-control-wrap your-name">
-									<input
-										type="text"
-										name="your-name"
-										size={40}
-										className="input-words wpcf7-form-control wpcf7-text wpcf7-validates-as-required form__input input wpcf7-not-valid"
-										placeholder="Ваше имя*"
-									/>
-									<span
-										className="wpcf7-not-valid-tip"
-										aria-hidden="true"
-									>
-										Поле обязательно для заполнения.
-									</span>
-								</span>
-							</div>
-							<div className="form__line">
-								<span className="wpcf7-form-control-wrap your-name">
-									<input
-										type="text"
-										name="phone"
-										size={40}
-										className="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form__input input wpcf7-not-valid _phone"
-										placeholder="Номер телефона*"
-									/>
-									<span
-										className="wpcf7-not-valid-tip"
-										aria-hidden="true"
-									>
-										Поле обязательно для заполнения.
-									</span>
-								</span>
-							</div>
-						</div>
-						<div className="form__button">
-							<button type="submit" className="button button--large">
-								Отправить
+						<div className="popup__button">
+							<button
+								type="button"
+								data-close
+								className="button button--large"
+								onClick={() => setActive(false)}
+							>
+								Закрыть
 							</button>
 						</div>
-						<div className="form__agreement">
-							Отправляя форму, Вы принимаете
-							<a href="/" target="_blank">
-								условия пользовательского соглашения
-							</a>
-							и согласны с
-							<a href="/" target="_blank">
-								политикой конфиденциальности
-							</a>
-							сайта
-						</div>
-						<button data-popup="#success" type="button">
-							Успех
-						</button>
-						<div className="wpcf7-response-output" aria-hidden="true">
-							Одно или несколько полей содержат ошибочные данные.
-							Пожалуйста, проверьте их и попробуйте ещё раз.
-						</div>
-					</form>
+					</Popup>
 				</div>
 			</div>
 		</section>

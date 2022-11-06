@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Lazy, Navigation, Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
+import ButtonCircle from "../../common/ButtonCircle";
 import { mediaSize } from "../../redux/adaptive/selectors";
 import { Media } from "../../redux/adaptive/types";
 
@@ -144,45 +145,9 @@ const Advantages = (props: Props) => {
 						);
 					})}
 					<div className="controllers">
-						<button
-							type="button"
-							className="arrow arrow--prev _icon-arrow timer"
-						>
-							<svg>
-								<circle
-									className="timer__background"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-								<circle
-									className="timer__progress"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-							</svg>
-						</button>
+						<ButtonCircle className="arrow arrow--prev _icon-arrow timer"/>
 						<div className="swiper-pagination"></div>
-						<button
-							type="button"
-							className="arrow arrow--next _icon-arrow timer"
-						>
-							<svg>
-								<circle
-									className="timer__background"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-								<circle
-									className="timer__progress"
-									cx="20"
-									cy="20"
-									r="19"
-								></circle>
-							</svg>
-						</button>
+						<ButtonCircle className="arrow arrow--next _icon-arrow timer"/>
 					</div>
 				</Swiper>
 			</div>

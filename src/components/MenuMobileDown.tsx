@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { AdaptiveStateType, Media } from "../redux/adaptive/types";
 import ButtonHeader from "./header/ButtonHeader";
+import PopupCallback from "./popup/PopupCallback";
 
 type MenuMobileDownProps = AdaptiveStateType;
 
 const MenuMobileDown = ({ media }: MenuMobileDownProps) => {
+	const [active, setActive] = useState(false);
 	return (
 		<div className="menu-mobile-down">
 			<div className="menu-mobile-down__container">
@@ -14,7 +17,8 @@ const MenuMobileDown = ({ media }: MenuMobileDownProps) => {
 					>
 						8 (4922) 42-12-83
 					</a>
-					{media <= Media.MOBILE && <ButtonHeader />}
+					{media <= Media.MOBILE && <ButtonHeader setActive={setActive}  />}
+					<PopupCallback active={active} setActive={setActive}/>
 				</div>
 			</div>
 		</div>
