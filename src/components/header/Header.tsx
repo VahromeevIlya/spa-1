@@ -39,7 +39,7 @@ const Header = ({ media }: HeaderProps) => {
 								<span>8 (4922) 42-12-83</span>
 							</a>
 							{media > Media.MOBILE && <ButtonHeader setActive={setActive} />}
-							<PopupCallback active={active} setActive={setActive}/>
+							{/*<PopupCallback active={active} setActive={setActive}/>*/}
 						</div>
 					</div>
 				</div>
