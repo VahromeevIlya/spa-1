@@ -8,27 +8,17 @@ import {
 	ErrorMessage,
 	useField,
 } from "formik";
-import * as yup from "yup";
 import clsx from "clsx";
 import Tippy from "@tippyjs/react";
 import Popup from "../popup/Popup";
 
-interface Values {
+export interface Values {
 	firstName: string;
 	phone: string;
 }
 type Props = {};
 
-const phoneRegExp =
-	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-//const SignupSchema = Yup.object().shape({
-
-//	phone: Yup.string()
-//		.matches(phoneRegExp, "Не правильный номер телефона")
-//		.required("Обязательное поле"),
-//});
-
-const validate = (values: any) => {
+export const validateFrom1 = (values: any) => {
 	const errors: any = {};
 	const { firstName, phone } = values;
 
@@ -38,9 +28,21 @@ const validate = (values: any) => {
 		errors.firstName = "Обязательное поле";
 	}
 
+	if (phone.length < 1) {
+		errors.phone = "Обязательное поле";
+	}
+	if (
+		(phone.substring(0, 2) === "+7" && phone.length < 18) ||
+		(phone.substring(0, 1) === "8" && phone.length < 17) ||
+		(phone.substring(0, 1) === "+" &&
+			phone.substring(0, 2) !== "+7" &&
+			phone.length < 10)
+	) {
+		errors.phone = "Введите корректный номер";
+	}
+
 	return errors;
 };
-
 
 const Order = (props: Props) => {
 	const [active, setActive] = useState(false);
@@ -60,14 +62,15 @@ const Order = (props: Props) => {
 							firstName: "",
 							phone: "",
 						}}
-						validate={validate}
+						validate={validateFrom1}
 						onSubmit={(
 							values: Values,
-							{ setSubmitting }: FormikHelpers<Values>
+							{ setSubmitting,resetForm }: FormikHelpers<Values>
 						) => {
 							setTimeout(() => {
 								setSubmitting(false);
 								setActive(true);
+								resetForm();
 								setTimeout(() => {
 									setActive(false);
 								}, 4000);
@@ -184,16 +187,14 @@ const Order = (props: Props) => {
 		</section>
 	);
 };
-const PhoneInput = (props: any) => {
-	const [phone, setPhone] = useState("");
-	const [field, meta,helpers] = useField(props.name);
-	console.log(field, meta,helpers);
-	
+export const PhoneInput = (props: any) => {
+	const [field, meta, helpers] = useField(props.name);
+	//console.log(field, meta,helpers);
+
 	function handlePhoneKeyDown(event: any) {
 		let inputValue = event.target.value.replace(/\D/g, "");
 		if (event.keyCode == 8 && inputValue.length == 1) {
-			setPhone("");
-			helpers.setValue('');
+			helpers.setValue("", false);
 		}
 	}
 	function handlePhoneChange(event: any) {
@@ -203,15 +204,13 @@ const PhoneInput = (props: any) => {
 			selectionStart = input.selectionStart,
 			formattedInputValue = "";
 		if (!inputNumbersValue) {
-			helpers.setValue('');
-			return setPhone("");
+			return helpers.setValue("", false);
 		}
 
 		if (input.value.length != selectionStart) {
 			// Editing in the middle of input, not last symbol
 			if (event.data && /\D/g.test(event.data)) {
 				// Attempt to input non-numeric symbol
-				setPhone(inputNumbersValue);
 				helpers.setValue(inputNumbersValue);
 			}
 			return;
@@ -221,7 +220,8 @@ const PhoneInput = (props: any) => {
 			if (inputNumbersValue[0] == "9")
 				inputNumbersValue = "7" + inputNumbersValue;
 			let firstSymbols = inputNumbersValue[0] == "8" ? "8" : "+7";
-			formattedInputValue = input.value = firstSymbols + " ";
+			helpers.setValue(firstSymbols + " ", false);
+			formattedInputValue = firstSymbols + " ";
 			if (inputNumbersValue.length > 1) {
 				formattedInputValue += "(" + inputNumbersValue.substring(1, 4);
 			}
@@ -237,9 +237,20 @@ const PhoneInput = (props: any) => {
 		} else {
 			formattedInputValue = "+" + inputNumbersValue.substring(0, 16);
 		}
+		let shouldValidate = false;
+		if (
+			(formattedInputValue.substring(0, 2) === "+7" &&
+				formattedInputValue.length === 18) ||
+			(formattedInputValue.substring(0, 1) === "8" &&
+				formattedInputValue.length === 17) ||
+			(formattedInputValue.substring(0, 1) === "+" &&
+				formattedInputValue.substring(0, 2) !== "+7" &&
+				formattedInputValue.length > 10)
+		) {
+			shouldValidate = true;
+		}
 
-		setPhone(formattedInputValue);
-		helpers.setValue(formattedInputValue);
+		helpers.setValue(formattedInputValue, shouldValidate);
 	}
 	function handePhonePaste(event: any) {
 		let value: any = event.target.value;
@@ -249,8 +260,7 @@ const PhoneInput = (props: any) => {
 		if (pasted) {
 			let pastedText = pasted.getData("Text");
 			if (/\D/g.test(pastedText)) {
-				setPhone(inputNumbersValue);
-				helpers.setValue(inputNumbersValue);
+				helpers.setValue(inputNumbersValue, false);
 				return;
 			}
 		}
@@ -260,18 +270,19 @@ const PhoneInput = (props: any) => {
 			<input
 				name={field.name}
 				type="tel"
-				className="input"
-				value={phone}
+				className={clsx(
+					"input",
+					meta.error && meta.touched && "wpcf7-not-valid"
+				)}
+				value={meta.value}
 				placeholder="Номер телефона*"
+				onBlur={() => helpers.setTouched(true, true)}
 				onChange={(event) => handlePhoneChange(event)}
 				onKeyDown={(event) => handlePhoneKeyDown(event)}
 				onPaste={(event) => handePhonePaste(event)}
 			/>
-			
 		</>
 	);
 };
 
 export default Order;
-
-
