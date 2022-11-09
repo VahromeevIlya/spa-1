@@ -1,7 +1,18 @@
-import React from "react";
+import clsx from "clsx";
+import {
+	ErrorMessage,
+	Field,
+	Form,
+	Formik,
+	FormikHelpers,
+	useField,
+} from "formik";
+import React, { useState } from "react";
+import Select from "react-select";
 import { EffectFade, Lazy, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonCircle from "../../common/ButtonCircle";
+import Popup from "../popup/Popup";
 import PortfolioInnerSlide from "./PortfolioInnerSlide";
 type Props = {};
 
@@ -89,7 +100,47 @@ const PortfolioSlides = [
 	},
 ];
 
+interface Values {
+	select: any;
+	checkbox: any;
+}
+
+const options = [
+	{ value: "chocolate", label: "Газовая" },
+	{ value: "strawberry", label: "Твердотопливная" },
+	{ value: "vanilla", label: "Дизельная" },
+];
+
+
+
+function SelectField(props: any) {
+	
+	const [field, state, { setValue, setTouched }] = useField(
+		props.name
+	);
+
+	// value is an array now
+	const onChange = (value: any) => {
+		setValue(value);
+	};
+
+	// use value to make this a  controlled component
+	// now when the form receives a value for 'campfeatures' it will populate as expected
+	return (
+		<Select
+			options={options}
+			defaultValue="chocolate"
+			{...props}
+			value={state?.value}
+			isMulti
+			onChange={onChange}
+			onBlur={setTouched}
+		/>
+	);
+}
+
 const Portfolio = (props: Props) => {
+	const [active, setActive] = useState(false);
 	return (
 		<section id="portfolio" className="portfolio">
 			<div className="portfolio__container">
@@ -200,103 +251,160 @@ const Portfolio = (props: Props) => {
 			</Swiper>
 			<div className="portfolio__container">
 				<div className="portfolio__form-shell">
-					<form action="#" className="portfolio__form portfolio-form">
-						<div className="portfolio-form__left">
-							<div className="portfolio-form__text text">
-								<p>
-									<span>Понравился проект?</span>
-								</p>
-								<h3>
-									Рассчитайте стоимость собственного в
-									<span>2 шага</span>
-								</h3>
-								<p>
-									Выполните 2 простых действия и мы подберем для Вас
-									лучшее решение
-								</p>
-							</div>
-						</div>
-						<div className="portfolio-form__right">
-							<div className="portfolio-form__row">
-								<div className="portfolio-form__line">
-									<div className="portfolio-form__subtitle">
-										Выберите тип котельной:
-									</div>
-									<div className="portfolio-form__checkboxes">
-										<div className="checkbox">
-											<label>
-												<input
-													checked
-													data-error="Ошибка"
-													className="checkbox__input"
-													type="checkbox"
-													value="Газовая"
-													name="form[]"
-												/>
-												<div className="checkbox__label"></div>
-												<span className="checkbox__text">
-													Газовая
-												</span>
-											</label>
-										</div>
-										<div className="checkbox">
-											<label>
-												<input
-													data-error="Ошибка"
-													className="checkbox__input"
-													type="checkbox"
-													value="Твердотопливная"
-													name="form[]"
-												/>
-												<div className="checkbox__label"></div>
-												<span className="checkbox__text">
-													Твердотопливная
-												</span>
-											</label>
-										</div>
-										<div className="checkbox">
-											<label>
-												<input
-													data-error="Ошибка"
-													className="checkbox__input"
-													type="checkbox"
-													value="Дизельная"
-													name="form[]"
-												/>
-												<div className="checkbox__label"></div>
-												<span className="checkbox__text">
-													Дизельная
-												</span>
-											</label>
-										</div>
-									</div>
-									<div className="portfolio-form__select">
-										<select name="form[boiler]" className="boiler">
-											<option value="Газовая" selected>
-												Газовая
-											</option>
-											<option value="Твердотопливная">
-												Твердотопливная
-											</option>
-											<option value="Дизельная">Дизельная</option>
-										</select>
+					<Formik
+						initialValues={{
+							select: options[0],
+							checkbox: "",
+						}}
+						onSubmit={(
+							values: Values,
+							{ setSubmitting, resetForm }: FormikHelpers<Values>
+						) => {
+							setTimeout(() => {
+								setSubmitting(false);
+								setActive(true);
+								resetForm();
+								setTimeout(() => {
+									setActive(false);
+								}, 4000);
+							}, 1000);
+						}}
+					>
+						{({ errors, touched, isSubmitting }) => (
+							<Form
+								className={clsx(
+									"portfolio__form portfolio-form",
+									isSubmitting && "submitting"
+								)}
+							>
+								<div className="portfolio-form__left">
+									<div className="portfolio-form__text text">
+										<p>
+											<span>Понравился проект?</span>
+										</p>
+										<h3>
+											Рассчитайте стоимость собственного в
+											<span>2 шага</span>
+										</h3>
+										<p>
+											Выполните 2 простых действия и мы подберем для
+											Вас лучшее решение
+										</p>
 									</div>
 								</div>
-								<div className="portfolio-form__line">
-									<button
-										id="portfolio-button"
-										type="button"
-										data-popup="#callback"
-										className="button button--small"
-									>
-										Узнать стоимость
-									</button>
+								<div className="portfolio-form__right">
+									<div className="portfolio-form__row">
+										<div className="portfolio-form__line">
+											<div className="portfolio-form__subtitle">
+												Выберите тип котельной:
+											</div>
+											<div className="portfolio-form__checkboxes">
+												<div className="checkbox">
+													<label>
+														<input
+															checked
+															data-error="Ошибка"
+															className="checkbox__input"
+															type="checkbox"
+															value="Газовая"
+															name="form[]"
+														/>
+														<div className="checkbox__label"></div>
+														<span className="checkbox__text">
+															Газовая
+														</span>
+													</label>
+												</div>
+												<div className="checkbox">
+													<label>
+														<input
+															data-error="Ошибка"
+															className="checkbox__input"
+															type="checkbox"
+															value="Твердотопливная"
+															name="form[]"
+														/>
+														<div className="checkbox__label"></div>
+														<span className="checkbox__text">
+															Твердотопливная
+														</span>
+													</label>
+												</div>
+												<div className="checkbox">
+													<label>
+														<input
+															data-error="Ошибка"
+															className="checkbox__input"
+															type="checkbox"
+															value="Дизельная"
+															name="form[]"
+														/>
+														<div className="checkbox__label"></div>
+														<span className="checkbox__text">
+															Дизельная
+														</span>
+													</label>
+												</div>
+												<Field
+													className="checkbox__input"
+													name="firstName"
+													placeholder="Ваше имя*"
+												/>
+											</div>
+											<div className="portfolio-form__select">
+												<SelectField name="select"/>
+												<select
+													name="form[boiler]"
+													className="boiler"
+												>
+													<option value="Газовая" selected>
+														Газовая
+													</option>
+													<option value="Твердотопливная">
+														Твердотопливная
+													</option>
+													<option value="Дизельная">
+														Дизельная
+													</option>
+												</select>
+											</div>
+										</div>
+										<div className="portfolio-form__line">
+											<button
+												id="portfolio-button"
+												type="submit"
+												onClick={() => setActive(true)}
+												className="button button--small"
+											>
+												Узнать стоимость
+											</button>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-					</form>
+							</Form>
+						)}
+					</Formik>
 				</div>
 			</div>
+			<Popup active={active} setActive={setActive}>
+				<div className="form__headline headline">
+					<h2 className="headline__title">Успешно!</h2>
+					<p className="headline__subtitle">
+						Спасибо за Ваше обращение. Менеджер свяжется с вами в
+						ближайшее время!
+					</p>
+				</div>
+				<div className="popup__button">
+					<button
+						type="button"
+						data-close
+						className="button button--large"
+						onClick={() => setActive(false)}
+					>
+						Закрыть
+					</button>
+				</div>
+			</Popup>
 		</section>
 	);
 };
