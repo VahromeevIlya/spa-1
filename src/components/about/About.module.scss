@@ -1,5 +1,6 @@
 @use "sass:math";
 @import "../../scss/utils.scss";
+@import "../../scss/global.scss";
 
 .section {
 	position: relative;
@@ -21,7 +22,7 @@
 			display: none;
 		}
 	}
-	& > .container {
+	& > :global(.container) {
 		@media (min-width: $pc) {
 			display: contents;
 		}
@@ -117,7 +118,7 @@
 				@include adaptiveValue("min-height", 58, 50, $containerWidth, $minWidth, 1);
 			}
 			&::after {
-				transform: scale(-1, 1);
+				@extend %mirror;
 			}
 		}
 		.achiveTitle {

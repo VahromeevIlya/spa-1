@@ -1,0 +1,183 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+
+.section {
+	position: relative;
+	.background {
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		&::before {
+			content: "";
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			background: linear-gradient(74.4deg, rgba(0, 0, 0, 0.33) 1.97%, rgba(0, 0, 0, 0) 49.3%);
+		}
+	}
+	:global(.swiper) {
+		height: 100%;
+	}
+	.slide {
+		position: relative;
+		pointer-events: none;
+		flex: 0 0 auto;
+		width: 100%;
+		min-height: 60vh;
+		padding: rem(80) 0;
+		&.swiper-slide-active {
+			pointer-events: auto;
+		}
+		@media (min-width: $mobile) {
+			min-height: 100vh;
+			padding: rem(160) 0;
+		}
+	}
+	.container {
+		display: grid;
+		align-items: center;
+		height: 100%;
+		@media (max-width: $mobile) {
+			align-items: end;
+		}
+	}
+	.body {
+		position: relative;
+		z-index: 2;
+		width: 100%;
+		p {
+			font-family: "DaysOne";
+			line-height: math.div(51, 40);
+			color: #ffffff;
+			max-width: rem(671);
+			@include adaptiveValue("font-size", 40, 20, $containerWidth, $minWidth, 1);
+			@media (min-width: $mobile) {
+				@include adaptiveValue("margin-bottom", 56, 0, $containerWidth, $minWidth, 1);
+			}
+			span {
+				color: $green;
+			}
+		}
+	}
+	.button {
+		box-shadow: 0px 5px 41px rgba(228, 61, 48, 0.5);
+		@media (max-width: $mobile) {
+			display: none;
+		}
+	}
+	.info {
+		position: absolute;
+		z-index: 3;
+		pointer-events: none;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		.container {
+			justify-items: end;
+		}
+	}
+	.info_block {
+		position: relative;
+		pointer-events: auto;
+		display: grid;
+		justify-items: center;
+		font-size: rem(14);
+		line-height: 144%;
+		text-align: center;
+		color: #ffffff;
+		background: rgba(0, 0, 0, 0.49);
+		width: rem(346);
+		padding: 0 rem(26) rem(24) rem(26);
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			width: rem(9);
+			height: rem(9);
+			border-radius: 50%;
+			background: white;
+		}
+		&::before {
+			left: 0;
+			transform: translate(-50%, -50%);
+		}
+		&::after {
+			right: 0;
+			transform: translate(50%, -50%);
+		}
+		@media (max-width: $mobile) {
+			display: none;
+		}
+		:global(.pulse-box) {
+			transform: translateY(-50%);
+			margin-bottom: rem(6);
+		}
+	}
+	:global {
+		.controls {
+			position: absolute;
+			z-index: 4;
+			pointer-events: none;
+			bottom: 0;
+			width: 100%;
+			@media (min-width: $mobile) {
+				height: rem(140);
+			}
+			@media (max-width: $mobile) {
+				bottom: rem(30);
+			}
+			&__grid {
+				pointer-events: auto;
+				width: rem(276);
+				@media (min-width: $mobile) {
+					display: grid;
+					grid-template-columns: repeat(2, 1fr);
+					grid-template-rows: auto 1fr;
+					gap: rem(20);
+					align-items: center;
+					justify-content: space-between;
+				}
+			}
+		}
+		.swiper-pagination {
+			grid-column: span 2;
+			@media (max-width: $mobile) {
+				display: none;
+			}
+		}
+		.fraction {
+			color: white;
+			&__current {
+				color: white;
+			}
+		}
+		.arrows {
+			color: white;
+			justify-self: end;
+			@media (max-width: $mobile) {
+				display: none;
+			}
+			.arrow--next {
+				&.animating:not(.hovered) {
+					.timer {
+						&__progress {
+							animation: timer 5s forwards linear;
+						}
+					}
+				}
+				&:not(.hovered) .timer {
+					&__progress {
+						stroke-dashoffset: 125.66368;
+					}
+				}
+			}
+		}
+	}
+}

@@ -11,6 +11,8 @@ import SliderWithControls from "../../common/SliderWithControls";
 import FullscreenInfo from "./FullscreenInfo";
 import FullscreenSlide from "./FullscreenSlide";
 import { mySlides } from "./Slides";
+import styles from './fullscreen.module.scss';
+
 type Props = {};
 
 const Fullscreen = (props: Props) => {
@@ -42,15 +44,15 @@ const Fullscreen = (props: Props) => {
 	} as SwiperOptions;
 
 	return (
-		<section className="fullscreen">
+		<section className={styles.section}>
 			<SliderWithControls
-				className="fullscreen__slider"
+				className={styles.slider}
 				controlsContainerClass="controls__container"
 				swiperOption={propsSwiper}
 			>
 				{mySlides.map((obj, index) => {
 					return (
-						<SwiperSlide className="fullscreen__slide" key={index}>
+						<SwiperSlide className={styles.slide} key={index}>
 							<FullscreenSlide {...obj} />
 						</SwiperSlide>
 					);

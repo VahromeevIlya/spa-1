@@ -1,9 +1,10 @@
+import styles from './fullscreen.module.scss';
 
 const FullscreenInfo = () => {
 	return (
-		<div className="fullscreen__info">
-			<div className="fullscreen__container">
-				<div className="fullscreen__info-block">
+		<div className={styles.info}>
+			<div className={styles.container}>
+				<div className={styles.info_block}>
 					<div className="pulse-box">
 						<svg
 							className="pulse-svg"

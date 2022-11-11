@@ -1,12 +1,12 @@
-import styles from './About.module.scss';
+import styles from './about.module.scss';
 
 const About = () => {
 	return (
 		<section id="about" className={styles.section}>
-			<div className={styles.container}>
+			<div className='container'>
 				<div className={styles.grid}>
 					<div className={styles.body}>
-						<div className={styles.container}>
+						<div className='container'>
 							<h2 className={`${styles.title} _title`}>Про нас</h2>
 							<div className={`${styles.text} text`}>
 								<p>
