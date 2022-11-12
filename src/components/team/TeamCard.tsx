@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './team.module.scss';
 
 type Props = {
 	img: string[];
@@ -8,8 +9,8 @@ type Props = {
 
 const TeamCard = ({ img, name, post }: Props) => {
 	return (
-		<div className="team-card">
-			<div className="team-card__image-ibg">
+		<div className={styles.card}>
+			<div className={`ibg ${styles.card_image}`}>
 				<picture>
 					<source
 						className="swiper-lazy"
@@ -23,9 +24,9 @@ const TeamCard = ({ img, name, post }: Props) => {
 					/>
 				</picture>
 			</div>
-			<div className="team-card__body">
-				<div className="team-card__name">{name}</div>
-				<div className="team-card__post">{post}</div>
+			<div className={styles.card_body}>
+				<div className={styles.card_name}>{name}</div>
+				<div className={styles.card_post}>{post}</div>
 			</div>
 		</div>
 	);

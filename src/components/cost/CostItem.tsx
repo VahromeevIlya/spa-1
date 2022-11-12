@@ -1,4 +1,6 @@
 import React from "react";
+import styles from './cost.module.scss';
+
 
 type Props = {
 	img: string[];
@@ -20,23 +22,23 @@ const CostItem = ({
 	price,
 }: Props) => {
 	return (
-		<div className="cost-cards__card">
-			<div className="cost-cards__image-ibg">
+		<div className={styles.card}>
+			<div className={`ibg ${styles.image}`}>
 				<picture>
 					<source srcSet={img[1]} type="image/webp" />
 					<img src={img[0]} alt="" />
 				</picture>
 			</div>
-			<div className="cost-cards__shell">
-				<div className="cost-cards__body">
-					<div className="cost-cards__headline">
-						<div className="cost-cards__title" dangerouslySetInnerHTML={{ __html: title }}>
+			<div className={styles.shell}>
+				<div className={styles.body}>
+					<div className={styles.headline}>
+						<div className={styles.card_title} dangerouslySetInnerHTML={{ __html: title }}>
 						</div>
-						<div className="cost-cards__subtitle">
+						<div className={styles.subtitle}>
 							{subtitle}
 						</div>
 					</div>
-					<div className="cost-cards__text text">
+					<div className={`${styles.card_text} text`}>
 						<hr />
 						<ul>
 							<li>
@@ -54,9 +56,9 @@ const CostItem = ({
 						</p>
 					</div>
 				</div>
-				<div className="cost-cards__order">
-					<div className="cost-cards__price">{price}</div>
-					<div className="cost-cards__button">
+				<div className={styles.order}>
+					<div className={styles.price}>{price}</div>
+					<div className={styles.button}>
 						<button
 							type="button"
 							data-popup="#callback"

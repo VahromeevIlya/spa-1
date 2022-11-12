@@ -1,10 +1,10 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { Lazy, Navigation, Pagination } from "swiper";
 import { SwiperSlide, Swiper } from "swiper/react";
 import ButtonCircle from "../../common/ButtonCircle";
 import { mediaSize } from "../../redux/adaptive/selectors";
 import { Media } from "../../redux/adaptive/types";
+import styles from "./advantages.module.scss";
 
 type Props = {};
 
@@ -50,27 +50,27 @@ const Advantages = (props: Props) => {
 
 	if (media > Media.MOBILE) {
 		return (
-			<section className="advantages">
-				<div className="advantages__container">
-					<h2 className="advantages__title _title">
+			<section className={styles.section}>
+				<div className="container">
+					<h2 className={`${styles.title} _title`}>
 						Почему выбирают нас?
 					</h2>
-					<div className="advantages__slider ">
-						<div className="advantages__swiper ">
+					<div className={styles.slider}>
+						<div className={styles.swiper}>
 							{advantagesItems.map((slide, index) => {
 								return (
-									<div key={index} className="advantages__slide">
-										<div className="advantages__item">
-											<div className="advantages__item-top">
-												<div className="advantages__item-icon">
+									<div key={index} className={styles.slide}>
+										<div className={styles.item}>
+											<div className={styles.item_top}>
+												<div className={styles.item_icon}>
 													<img src={slide.img} alt="" />
 												</div>
-												<div className="advantages__item-title">
+												<div className={styles.item_title}>
 													{slide.title}
 												</div>
 											</div>
 											<p
-												className="advantages__text"
+												className={styles.text}
 												dangerouslySetInnerHTML={{
 													__html: slide.text,
 												}}
@@ -87,9 +87,9 @@ const Advantages = (props: Props) => {
 	}
 
 	return (
-		<section className="advantages">
-			<div className="advantages__container">
-				<h2 className="advantages__title _title">Почему выбирают нас?</h2>
+		<section className={styles.section}>
+			<div className="container">
+				<h2 className={`${styles.title} _title`}>Почему выбирают нас?</h2>
 				<Swiper
 					modules={[Navigation, Pagination, Lazy]}
 					observer={true}
@@ -120,22 +120,22 @@ const Advantages = (props: Props) => {
 							autoHeight: false,
 						},
 					}}
-					className="advantages__slider"
+					className={styles.slider}
 				>
 					{advantagesItems.map((slide, index) => {
 						return (
-							<SwiperSlide key={index} className="advantages__slide">
-								<div className="advantages__item">
-									<div className="advantages__item-top">
-										<div className="advantages__item-icon">
+							<SwiperSlide key={index} className={styles.slide}>
+								<div className={styles.item}>
+									<div className={styles.item_top}>
+										<div className={styles.item_icon}>
 											<img src={slide.img} alt="" />
 										</div>
-										<div className="advantages__item-title">
+										<div className={styles.item_title}>
 											{slide.title}
 										</div>
 									</div>
 									<p
-										className="advantages__text"
+										className={styles.text}
 										dangerouslySetInnerHTML={{
 											__html: slide.text,
 										}}
@@ -144,10 +144,10 @@ const Advantages = (props: Props) => {
 							</SwiperSlide>
 						);
 					})}
-					<div className="controllers">
-						<ButtonCircle className="arrow arrow--prev _icon-arrow timer"/>
+					<div className={styles.controllers}>
+						<ButtonCircle className="arrow arrow--prev _icon-arrow timer" />
 						<div className="swiper-pagination"></div>
-						<ButtonCircle className="arrow arrow--next _icon-arrow timer"/>
+						<ButtonCircle className="arrow arrow--next _icon-arrow timer" />
 					</div>
 				</Swiper>
 			</div>

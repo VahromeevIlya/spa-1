@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import styles from './work.module.scss';
 
 type Props = {
 	step: number;
@@ -11,7 +11,7 @@ type Props = {
 const WorkSlide = ({ step, img, title, text }: Props) => {
 	return (
 		<>
-			<div className="work__image-ibg">
+			<div className={`ibg ${styles.image}`}>
 				<picture>
 					<source
 						className="swiper-lazy"
@@ -21,16 +21,16 @@ const WorkSlide = ({ step, img, title, text }: Props) => {
 					<img className="swiper-lazy" data-src={img.standard} alt="" />
 				</picture>
 			</div>
-			<div className="work__body">
-				<h2 className="work__title _title">{title}</h2>
-				<div className="work__steps">
+			<div className={styles.body}>
+				<h2 className={`${styles.title} _title`}>{title}</h2>
+				<div className={styles.steps}>
 					{[...Array(5)].map((_, i) => (
-						<div key={i} className={clsx("work__step",step === i && '_active mobile', i < step && '_prev-active')}>
+						<div key={i} className={clsx(styles.step,step === i && '_active mobile', i < step && '_prev-active')}>
 							<p>Шаг {i+1}</p>
 						</div>
 					))}
 				</div>
-				<div className="work__text">
+				<div className={styles.text}>
 					<p dangerouslySetInnerHTML={{ __html: text }}></p>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ import ButtonCircle from "../../common/ButtonCircle";
 import { mediaSize } from "../../redux/adaptive/selectors";
 import { Media } from "../../redux/adaptive/types";
 import TeamCard from "./TeamCard";
+import styles from "./team.module.scss";
 
 type Props = {};
 
@@ -47,20 +48,24 @@ const TeamSlides = [
 	},
 ];
 
+const TeamArrows = () => {
+	return (
+		<div className={`${styles.arrows} arrows`}>
+			<ButtonCircle className="arrow arrow--prev  arrow--team _icon-arrow timer" />
+			<ButtonCircle className="arrow arrow--next arrow--team _icon-arrow timer" />
+		</div>
+	);
+};
+
 const Team = (props: Props) => {
 	const media = useSelector(mediaSize);
 	return (
-		<section id="team" className="team">
-			<div className="team__container">
-				<div className="team__grid">
-					<div className="team__top">
-						<h2 className="team__title _title">Наша команда</h2>
-						{media > Media.MOBILE_SMALL && (
-							<div className="team__arrows arrows">
-								<ButtonCircle className="arrow arrow--prev  arrow--team _icon-arrow timer" />
-								<ButtonCircle className="arrow arrow--next arrow--team _icon-arrow timer" />
-							</div>
-						)}
+		<section id="team" className={styles.section}>
+			<div className="container">
+				<div className={styles.grid}>
+					<div className={styles.top}>
+						<h2 className={`${styles.title} _title`}>Наша команда</h2>
+						{media > Media.MOBILE_SMALL && <TeamArrows />}
 					</div>
 					<Swiper
 						modules={[Navigation, Pagination, Lazy]}
@@ -77,21 +82,16 @@ const Team = (props: Props) => {
 							nextEl: ".arrow--team.arrow--next",
 							prevEl: ".arrow--team.arrow--prev",
 						}}
-						className="team__slider"
+						className={styles.slider}
 					>
 						{TeamSlides.map((item, index) => {
 							return (
-								<SwiperSlide className="team__slide" key={index}>
+								<SwiperSlide className={styles.slide} key={index}>
 									<TeamCard {...item} />
 								</SwiperSlide>
 							);
 						})}
-						{media <= Media.MOBILE_SMALL && (
-							<div className="team__arrows arrows">
-								<ButtonCircle className="arrow arrow--prev  arrow--team _icon-arrow timer" />
-								<ButtonCircle className="arrow arrow--next arrow--team _icon-arrow timer" />
-							</div>
-						)}
+						{media <= Media.MOBILE_SMALL && <TeamArrows />}
 					</Swiper>
 				</div>
 			</div>

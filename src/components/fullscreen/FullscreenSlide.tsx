@@ -4,7 +4,7 @@ import styles from './fullscreen.module.scss';
 const FullscreenSlide = ({ img, text, link }: SlideFullscreen) => {
 	return (
 		<>
-			<div className={`img-ibg ${styles.background}`}>
+			<div className={`ibg ${styles.background}`}>
 				<img className="swiper-lazy" data-src={img} alt="" />
 			</div>
 			<div className={styles.container}>

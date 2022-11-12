@@ -1,6 +1,6 @@
 import React from "react";
 import CostItem from "./CostItem";
-
+import styles from './cost.module.scss';
 type Props = {};
 
 
@@ -55,10 +55,10 @@ const CostItems = [
 
 const Cost = (props: Props) => {
 	return (
-		<section className="cost">
-			<div className="cost__container">
-				<h2 className="cost__title _title">Сколько стоит?</h2>
-				<div className="cost__text text">
+		<section className={styles.section}>
+			<div className="container">
+				<h2 className={`${styles.title} _title`}>Сколько стоит?</h2>
+				<div className={`${styles.text} text`}>
 					<p>
 						<span>Важно!</span>
 					</p>
@@ -78,9 +78,9 @@ const Cost = (props: Props) => {
 					</p>
 				</div>
 			</div>
-			<div className="cost__container">
-				<div className="cost-cards">
-					<div className="cost-cards__grid">
+			<div className="container">
+				<div className={styles.cards}>
+					<div className={styles.grid}>
 						{CostItems.map((item,index) => {
 							return <CostItem key={index} {...item}/>
 						})}

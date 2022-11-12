@@ -1,14 +1,14 @@
 import React from "react";
-
+import styles from './keep.module.scss';
 type Props = {};
 
 const Keep = (props: Props) => {
 	return (
-		<section className="keep">
-			<div className="keep__container">
-				<div className="keep__grid">
-					<div className="keep__body">
-						<div className="keep__text">
+		<section className={styles.section}>
+			<div className="container">
+				<div className={styles.grid}>
+					<div className={styles.body}>
+						<div className={styles.text}>
 							<p>
 								В нашей компании работают более <strong>50</strong>{" "}
 								профессионалов. Средний стаж каждого сотрудника более
@@ -21,12 +21,12 @@ const Keep = (props: Props) => {
 								чем похвастаться.
 							</p>
 						</div>
-						<div className="keep__browsing _icon-mouse">
+						<div className={`${styles.browsing} _icon-mouse`}>
 							ЛИСТАЙТЕ ДАЛЬШЕ
 						</div>
 					</div>
-					<div className="keep__images">
-						<div className="keep__image keep__image--large">
+					<div className={styles.images}>
+						<div className={`${styles.image} ${styles.large}`}>
 							<picture>
 								<source
 									srcSet="img/keep/keep-1.webp"
@@ -35,7 +35,7 @@ const Keep = (props: Props) => {
 								<img src="img/keep/keep-1.jpg" alt="" />
 							</picture>
 						</div>
-						<div className="keep__image keep__image--small">
+						<div className={`${styles.image} ${styles.small}`}>
 							<picture>
 								<source
 									srcSet="img/keep/keep-2.webp"

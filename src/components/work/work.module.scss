@@ -1,0 +1,213 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+
+.test {
+	color: red;
+}
+
+.section {
+	background: $blue;
+	@include adaptiveValue("padding-bottom", 126, 45, $containerWidth, $minWidth, 1);
+	@include adaptiveValue("padding-top", 188, 35, $containerWidth, $minWidth, 1);
+	@include adaptiveValue("margin-bottom", 80, 35, $containerWidth, $minWidth, 1);
+	.slider {
+		position: relative;
+	}
+	.slide {
+		flex: 0 0 100%;
+		display: grid;
+		grid-template-columns: percent(570, 1410) 1fr;
+		height: auto;
+		@include adaptiveValue("gap", 135, 30, $containerWidth, 992, 1);
+		@media (max-width: $mobile) {
+			grid-template-columns: 1fr;
+		}
+	}
+	.image {
+		align-self: start;
+		padding-bottom: 100%;
+		border-radius: 0 rem(67) 0 rem(67);
+		overflow: hidden;
+		@media (max-width: $mobile) {
+			width: rem(300);
+			padding-bottom: rem(300);
+		}
+		@media (max-width: $mobileSmall) {
+			display: none;
+		}
+	}
+	.body {
+
+	}
+	.title {
+		pointer-events: none;
+		@include adaptiveValue("padding-top", 44, 0, $containerWidth, 768, 1);
+		@include adaptiveValue("margin-bottom", 72, 42, $containerWidth, 768, 1);
+		@media (max-width: $mobileSmall) {
+			text-align: center;
+		}
+	}
+	.steps {
+		pointer-events: none;
+		display: flex;
+		margin-bottom: rem(32);
+		@media (max-width: $mobileSmall) {
+			justify-content: center;
+		}
+	}
+	.step {
+		position: relative;
+		z-index: 1;
+		display: inline-block;
+		white-space: nowrap;
+		&:not(:last-child) {
+			padding-right: rem(16);
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			z-index: -1;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+			width: 100%;
+			height: rem(2);
+			background: #c7c7c7;
+			visibility: hidden;
+		}
+		@media (max-width: $tablet) {
+			padding-right: 0 !important;
+			&:not(.mobile),
+			&::before {
+				display: none;
+			}
+		}
+		//composes: test;
+		&._prev-active {
+			&::before {
+				visibility: visible;
+				background: $green;
+			}
+			p {
+				background: $green;
+			}
+		}
+		&._active {
+			&::before {
+				visibility: visible;
+			}
+			p {
+				background: $green;
+			}
+		}
+		p {
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: rem(20);
+			color: white;
+			background: #c7c7c7;
+			padding: rem(8) rem(16);
+		}
+	}
+	.text {
+		pointer-events: none;
+		font-weight: 400;
+		line-height: 164.5%;
+		color: $strong;
+		padding-bottom: rem(122);
+		@include adaptiveValue("font-size", 23, 18, $containerWidth, $minWidth, 1);
+		.swiper-slide-active & {
+			pointer-events: auto;
+		}
+		@media (max-width: $mobile) {
+			padding-bottom: rem(30);
+		}
+		@media (max-width: $mobileSmall) {
+			text-align: center;
+		}
+	}
+	:global {
+		.controls {
+			position: relative;
+			z-index: 2;
+			pointer-events: none;
+			@media (min-width: $mobile) {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+			}
+			&__shell {
+				@media (min-width: $mobile) {
+					display: grid;
+					grid-template-columns: percent(570, 1410) 1fr;
+					@include adaptiveValue("gap", 135, 30, $containerWidth, 992, 1);
+				}
+			}
+			&__grid {
+				pointer-events: auto;
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				grid-template-rows: auto 1fr;
+				gap: rem(20);
+				grid-column: 2/3;
+				align-items: center;
+				justify-content: space-between;
+				width: rem(276);
+				background: $blue;
+				@media (min-width: $mobile) {
+					padding-bottom: rem(42);
+				}
+				@media (max-width: $mobileSmall) {
+					justify-items: center;
+					grid-template-columns: rem(40) 1fr rem(40);
+					width: 100%;
+				}
+			}
+		}
+		.swiper-pagination {
+			grid-column: span 2;
+			@media (max-width: $mobileSmall) {
+				grid-column: span 3;
+				order: 1;
+			}
+			.swiper-pagination-progressbar-fill {
+				background-color: $green;
+			}
+		}
+		.fraction {
+			@media (max-width: $mobileSmall) {
+				order: 3;
+			}
+		}
+		.arrows {
+			justify-self: end;
+			@media (max-width: $mobileSmall) {
+				display: contents;
+			}
+			.arrow--next {
+				&.animating:not(.hovered) {
+					.timer {
+						&__progress {
+							animation: timer 5s forwards linear;
+						}
+					}
+				}
+				&:not(.hovered) .timer {
+					&__progress {
+						stroke-dashoffset: 125.66368;
+					}
+				}
+				@media (max-width: $mobileSmall) {
+					order: 4;
+				}
+			}
+			.arrow--prev {
+				@media (max-width: $mobileSmall) {
+					order: 2;
+				}
+			}
+		}
+	}
+}

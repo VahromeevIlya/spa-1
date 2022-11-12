@@ -9,6 +9,8 @@ import {
 import { SwiperSlide } from "swiper/react";
 import SliderWithControls from "../../common/SliderWithControls";
 import WorkSlide from "./WorkSlide";
+import styles from './work.module.scss';
+
 
 type Props = {};
 
@@ -105,16 +107,16 @@ const Work = (props: Props) => {
 	} as SwiperOptions;
 
 	return (
-		<section className="work">
-			<div className="work__container">
+		<section className={styles.section}>
+			<div className="container">
 				<SliderWithControls
-					className="work__slider"
+					className={styles.slider}
 					controlsContainerClass="controls__shell"
 					swiperOption={propsSwiper}
 				>
 					{WorkSlides.map((obj, index) => {
 						return (
-							<SwiperSlide className="work__slide" key={index}>
+							<SwiperSlide className={styles.slide} key={index}>
 								<WorkSlide step={index} {...obj} />
 							</SwiperSlide>
 						);

@@ -1,0 +1,105 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+
+.section {
+	@include adaptiveValue("padding-bottom", 110, 50, $containerWidth, $minWidth, 1);
+	.title {
+		@include adaptiveValue("margin-bottom", 67, 19, $containerWidth, $minWidth, 1);
+		@media (max-width: $mobile) {
+			text-align: center;
+		}
+	}
+	.swiper {
+		display: flex;
+		@media (min-width: $mobile) {
+			display: grid !important;
+			grid-template-columns: repeat(auto-fill, minmax(rem(340), 1fr));
+			grid-auto-rows: 1fr;
+			@include adaptiveValue("gap", 30, 16, $containerWidth, 768, 1);
+		}
+	}
+	.slide {
+		flex: 0 0 auto;
+		height: 100%;
+		@media (max-width: $mobile) {
+			width: 100%;
+			height: auto;
+		}
+	}
+	.item {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
+		gap: rem(22);
+		height: 100%;
+		background: #ffffff;
+		border: rem(1) solid #f0f0f0;
+		border-radius: rem(28);
+		@include adaptiveValue("padding", 40, 16, $containerWidth, $minWidth, 1);
+		@media (max-width: $mobileSmall) {
+			gap: rem(10);
+			border: none;
+		}
+	}
+	.item_top {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		gap: rem(22);
+		@media (max-width: $mobileSmall) {
+			grid-template-columns: 1fr;
+			justify-items: center;
+		}
+	}
+	.item_icon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: rem(71);
+		height: rem(71);
+		background: $green;
+		border-radius: rem(26) rem(26) 0px rem(26);
+		@media (max-width: $mobileSmall) {
+			width: rem(42);
+			height: rem(42);
+			border-radius: rem(14) rem(14) 0px rem(14);
+			img {
+				width: rem(20);
+				height: rem(20);
+				object-fit: contain;
+			}
+		}
+	}
+	.item_title {
+		font-weight: 600;
+		font-size: rem(18);
+		line-height: 120%;
+		color: $strong;
+		@media (max-width: $mobileSmall) {
+			font-size: rem(15);
+		}
+	}
+	.text {
+		font-size: rem(14);
+		line-height: 144%;
+		@media (max-width: $mobileSmall) {
+			text-align: center;
+		}
+	}
+	.controllers {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		grid-template-columns: rem(40) 1fr rem(40);
+		align-items: center;
+		justify-items: center;
+		gap: rem(8);
+		padding-top: rem(16);
+		@media (min-width: $mobile) {
+			display: none;
+		}
+		@media (max-width: $mobileSmall) {
+			padding: 0 rem(24);
+		}
+	}
+}

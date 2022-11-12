@@ -1,0 +1,78 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+.section {
+	@include adaptiveValue("padding-bottom", 110, 58, $containerWidth, $minWidth, 1);
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		@include adaptiveValue("gap", 66, 38, $containerWidth, $minWidth, 1);
+	}
+	.top {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		@media (max-width: $mobileSmall) {
+			grid-template-columns: 1fr;
+		}
+	}
+	.title {
+		@media (max-width: $mobileSmall) {
+			text-align: center;
+		}
+	}
+	.arrows {
+		@media (max-width: $mobileSmall) {
+			position: absolute;
+			top: rem(50.5);
+			transform: translateY(-50%);
+			justify-content: space-between;
+			width: 100%;
+		}
+	}
+	.slider {
+		position: relative;
+	}
+	.slide {
+		flex: 0 0 auto;
+		width: rem(210);
+		@media (max-width: $mobileSmall) {
+			flex: 0 0 100%;
+			width: 100%;
+		}
+	}
+}
+.card {
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-items: center;
+	grid-template-rows: auto 1fr;
+	gap: rem(22);
+	padding: rem(32) rem(8);
+	height: 100%;
+	background: #ffffff;
+	border: rem(1) solid #f0f0f0;
+	border-radius: rem(28);
+	@media (max-width: $mobileSmall) {
+		padding: 0;
+		border: none;
+	}
+	.card_image {
+		width: rem(101);
+		height: rem(101);
+		border-radius: 50%;
+		overflow: hidden;
+		background: #f0f0f0;
+	}
+	.card_body {
+		text-align: center;
+	}
+	.card_name {
+		color: $green;
+		font-weight: 700;
+		line-height: 144%;
+	}
+	.card_post {
+		font-size: rem(12);
+		line-height: 144%;
+	}
+}
