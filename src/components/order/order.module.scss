@@ -1,0 +1,41 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+
+.section {
+	position: relative;
+	@include adaptiveValue("margin-bottom", 110, 30, $containerWidth, $minWidth, 1);
+	.image{
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: percent(1095, 1920);
+		@media (max-width: $mobile) {
+			display: none;
+		}
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr percent(570, 1410);
+		background: $brown;
+		border-radius: 0 rem(67) 0 0;
+		@media (max-width: $mobile) {
+			grid-template-columns: 1fr;
+			border-radius: 0;
+			margin: 0px rem(-24);
+		}
+	}
+	.form {
+		color: white;
+		@include adaptiveValue("padding-top", 60, 24, $containerWidth, 768, 1);
+		@include adaptiveValue("padding-bottom", 60, 24, $containerWidth, 768, 1);
+		@include adaptiveValue("padding-left", 100, 24, $containerWidth, 768, 1);
+		@include adaptiveValue("padding-right", 100, 24, $containerWidth, 768, 1);
+		@media (min-width: $mobile) {
+			grid-column: 2/3;
+		}
+		:global(.input) {
+			color: white;
+		}
+	}
+}

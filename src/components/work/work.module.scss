@@ -82,8 +82,7 @@
 				display: none;
 			}
 		}
-		//composes: test;
-		&._prev-active {
+		&:global(._prev-active) {
 			&::before {
 				visibility: visible;
 				background: $green;
@@ -92,7 +91,7 @@
 				background: $green;
 			}
 		}
-		&._active {
+		&:global(._active) {
 			&::before {
 				visibility: visible;
 			}

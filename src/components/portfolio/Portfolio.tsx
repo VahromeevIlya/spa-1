@@ -7,13 +7,15 @@ import {
 	FormikHelpers,
 	useField,
 } from "formik";
-import React, { useState } from "react";
+import { useState } from "react";
 import Select from "react-select";
 import { EffectFade, Lazy, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonCircle from "../../common/ButtonCircle";
 import Popup from "../popup/Popup";
 import PortfolioInnerSlide from "./PortfolioInnerSlide";
+import styles from './portfolio.module.scss';
+
 type Props = {};
 
 const PortfolioSlides = [
@@ -142,10 +144,10 @@ function SelectField(props: any) {
 const Portfolio = (props: Props) => {
 	const [active, setActive] = useState(false);
 	return (
-		<section id="portfolio" className="portfolio">
-			<div className="portfolio__container">
-				<div className="portfolio__top">
-					<h2 className="portfolio__title _title">Портфолио</h2>
+		<section id="portfolio" className={styles.section}>
+			<div className="container">
+				<div className={styles.top}>
+					<h2 className={`${styles.title} _title`}>Портфолио</h2>
 					<div className="portfolio__arrows arrows">
 						<ButtonCircle className="arrow arrow--prev arrow--portfolio _icon-arrow timer" />
 						<ButtonCircle className="arrow arrow--next arrow--portfolio _icon-arrow timer" />
@@ -153,7 +155,7 @@ const Portfolio = (props: Props) => {
 				</div>
 			</div>
 			<Swiper
-				className="portfolio__slider"
+				className={styles.slider}
 				modules={[Navigation, EffectFade]}
 				effect="fade"
 				fadeEffect={{
@@ -181,7 +183,7 @@ const Portfolio = (props: Props) => {
 			>
 				{PortfolioSlides.map((obj, index) => {
 					return (
-						<SwiperSlide key={index} className="portfolio__slide">
+						<SwiperSlide key={index} className={styles.slide}>
 							<Swiper
 								modules={[Navigation, Pagination, Lazy]}
 								observer={true}
@@ -203,28 +205,28 @@ const Portfolio = (props: Props) => {
 									el: ".swiper-pagination",
 									clickable: true,
 								}}
-								className="portfolio__innerSlider portfolio-inner-slider"
+								className={styles.inner_slider}
 							>
 								{obj.img.map((item, index) => {
 									return (
 										<SwiperSlide
 											key={index}
-											className="portfolio-inner-slider__slide"
+											className={styles.inner_slide}
 										>
 											<PortfolioInnerSlide {...item} />
 										</SwiperSlide>
 									);
 								})}
 
-								<div className="portfolio-inner-slider__body">
-									<div className="portfolio-inner-slider__title">
+								<div className={styles.inner_body}>
+									<div className={styles.inner_title}>
 										{obj.title}
 									</div>
-									<div className="portfolio-inner-slider__subtitle">
+									<div className={styles.inner_subtitle}>
 										{obj.text}
 									</div>
 								</div>
-								<div className="portfolio-inner-slider__arrows arrows">
+								<div className={`${styles.arrows} arrows`}>
 									<button
 										type="button"
 										className="arrow arrow--prev _icon-arrow"
@@ -236,9 +238,9 @@ const Portfolio = (props: Props) => {
 								</div>
 								<div className="swiper-pagination"></div>
 							</Swiper>
-							<div className="portfolio__container">
-								<div className="portfolio__body">
-									<div className="portfolio__text text">
+							<div className={styles.container}>
+								<div className={styles.body}>
+									<div className={`${styles.text} text`}>
 										<ul
 											dangerouslySetInnerHTML={{ __html: obj.list }}
 										></ul>
@@ -249,8 +251,8 @@ const Portfolio = (props: Props) => {
 					);
 				})}
 			</Swiper>
-			<div className="portfolio__container">
-				<div className="portfolio__form-shell">
+			<div className="container">
+				<div className={styles.form_shell}>
 					<Formik
 						initialValues={{
 							select: options[0],
@@ -273,11 +275,11 @@ const Portfolio = (props: Props) => {
 						{({ errors, touched, isSubmitting }) => (
 							<Form
 								className={clsx(
-									"portfolio__form portfolio-form",
+									styles.form,
 									isSubmitting && "submitting"
 								)}
 							>
-								<div className="portfolio-form__left">
+								<div className={styles.form_left}>
 									<div className="portfolio-form__text text">
 										<p>
 											<span>Понравился проект?</span>
@@ -292,13 +294,13 @@ const Portfolio = (props: Props) => {
 										</p>
 									</div>
 								</div>
-								<div className="portfolio-form__right">
-									<div className="portfolio-form__row">
-										<div className="portfolio-form__line">
-											<div className="portfolio-form__subtitle">
+								<div className={styles.form_right}>
+									<div className={styles.form_row}>
+										<div className={styles.form_line}>
+											<div className={styles.form_subtitle}>
 												Выберите тип котельной:
 											</div>
-											<div className="portfolio-form__checkboxes">
+											<div className={styles.form_checkboxes}>
 												<div className="checkbox">
 													<label>
 														<input
@@ -351,7 +353,7 @@ const Portfolio = (props: Props) => {
 													placeholder="Ваше имя*"
 												/>
 											</div>
-											<div className="portfolio-form__select">
+											<div className={styles.form_select}>
 												<SelectField name="select"/>
 												<select
 													name="form[boiler]"
@@ -369,7 +371,7 @@ const Portfolio = (props: Props) => {
 												</select>
 											</div>
 										</div>
-										<div className="portfolio-form__line">
+										<div className={styles.form_line}>
 											<button
 												id="portfolio-button"
 												type="submit"

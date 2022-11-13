@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
 import {
 	Formik,
 	Field,
@@ -11,6 +10,7 @@ import {
 import clsx from "clsx";
 import Tippy from "@tippyjs/react";
 import Popup from "../popup/Popup";
+import styles from './order.module.scss';
 
 export interface Values {
 	firstName: string;
@@ -48,15 +48,15 @@ const Order = (props: Props) => {
 	const [active, setActive] = useState(false);
 
 	return (
-		<section id="order" className="order">
-			<div className="order__image-ibg">
+		<section id="order" className={styles.section}>
+			<div className={`${styles.image} ibg`}>
 				<picture>
 					<source srcSet="img/order/order.webp" type="image/webp" />
 					<img src="img/order/order.jpg" alt="" />
 				</picture>
 			</div>
-			<div className="order__container">
-				<div className="order__grid">
+			<div className="container">
+				<div className={styles.grid}>
 					<Formik
 						initialValues={{
 							firstName: "",
@@ -80,7 +80,7 @@ const Order = (props: Props) => {
 						{({ errors, touched, isSubmitting }) => (
 							<Form
 								className={clsx(
-									"order__form form",
+									`${styles.form} form`,
 									isSubmitting && "submitting"
 								)}
 							>
@@ -189,8 +189,6 @@ const Order = (props: Props) => {
 };
 export const PhoneInput = (props: any) => {
 	const [field, meta, helpers] = useField(props.name);
-	//console.log(field, meta,helpers);
-
 	function handlePhoneKeyDown(event: any) {
 		let inputValue = event.target.value.replace(/\D/g, "");
 		if (event.keyCode == 8 && inputValue.length == 1) {
