@@ -3,6 +3,8 @@ import { AdaptiveStateType, Media } from "../../redux/adaptive/types";
 import Menu from "./Menu";
 import ButtonHeader from "./ButtonHeader";
 import PopupCallback from "../popup/PopupCallback";
+import styles from './header.module.scss';
+
 
 type HeaderProps = AdaptiveStateType;
 
@@ -14,10 +16,10 @@ const Header = ({ media }: HeaderProps) => {
 	const [active, setActive] = useState(false);
 
 	return (
-		<header className="header" data-scroll="400">
-			<div className="header__wrapper" data-lp>
-				<div className="header__container">
-					<div className="header__grid">
+		<header className={styles.root} data-scroll="400">
+			<div className={styles.wrapper}>
+				<div className="container">
+					<div className={styles.grid}>
 						<button
 							onClick={toggleBurger}
 							type="button"
@@ -25,16 +27,16 @@ const Header = ({ media }: HeaderProps) => {
 						>
 							<span></span>
 						</button>
-						<a href="" className="header__logo">
+						<a href="" className={styles.logo}>
 							<img src="img/logo.svg" alt="Логотип" />
 						</a>
-						<div className="header__menu menu">
+						<div className={`${styles.menu} menu`}>
 							{media >= Media.DESKTOP && <Menu />}
 						</div>
-						<div className="header__actions">
+						<div className={styles.actions}>
 							<a
 								href="tel:8 (4922) 42-12-83"
-								className="header__phone _icon-phone"
+								className={`${styles.phone} _icon-phone`}
 							>
 								<span>8 (4922) 42-12-83</span>
 							</a>

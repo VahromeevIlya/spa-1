@@ -1,0 +1,119 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+
+.root {
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+	color: white;
+	@include adaptiveValue("padding-top", 28, 0, $containerWidth, 992, 1);
+	.wrapper {
+		padding: rem(16) 0;
+		:global(.menu-open) & {
+			border-bottom: rem(1) solid rgba(255, 255, 255, 0.16);
+		}
+	}
+	&:global(._no-transform) {
+		.wrapper {
+			animation: none !important;
+			transform: none !important;
+		}
+	}
+	&:global(._header-scroll) {
+		.wrapper {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			z-index: 100;
+			background: $brown;
+		}
+	}
+	&:global(._header-animate) {
+		.wrapper {
+			animation: slideInDown 0.8s linear forwards;
+		}
+	}
+	&:global(._header-animated) {
+		.wrapper {
+			transform: none;
+		}
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: rem(16);
+		@media (max-width: $tablet) {
+			grid-template-columns: rem(160) 1fr rem(160);
+		}
+		@media (max-width: $mobile) {
+			grid-template-columns: rem(30) 1fr rem(30);
+		}
+	}
+	.logo {
+		@media (max-width: $tablet) {
+			justify-self: center;
+		}
+		@media (max-width: $mobile) {
+			img {
+				width: rem(114);
+				height: rem(36);
+			}
+		}
+	}
+	.menu {
+		@media (max-width: $tablet) {
+			display: none;
+		}
+	}
+	.phone {
+		display: grid;
+		font-size: rem(18);
+		line-height: math.div(17, 18);
+		margin-bottom: rem(4);
+		justify-content: end;
+		transition: color 0.3s ease 0s;
+		@media (any-hover: hover) {
+			&:hover {
+				color: $green;
+			}
+		}
+		@media (min-width: $mobile) {
+			&::before {
+				display: none;
+			}
+		}
+		@media (max-width: $mobile) {
+			span {
+				display: none;
+			}
+		}
+	}
+	.callback {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		transition: color 0.3s ease 0s;
+		&::before {
+			font-size: rem(18);
+			padding-right: rem(6);
+		}
+		@media (min-width: $mobile) {
+			justify-content: flex-end;
+			color: rgba(255, 255, 255, 0.53);
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				color: $green;
+			}
+		}
+		span {
+			font-size: rem(11);
+			line-height: rem(11);
+			transform: translateY(rem(1));
+			text-transform: uppercase;
+		}
+	}
+}
+
