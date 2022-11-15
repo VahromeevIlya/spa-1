@@ -316,21 +316,6 @@
 		}
 	}
 }
-//?========================================================================================================================================================
-.grecaptcha-badge {
-	display: none !important;
-	clip: rect(0 0 0 0) !important;
-	clip-path: inset(50%) !important;
-	height: 1px !important;
-	overflow: hidden !important;
-	position: absolute !important;
-	white-space: nowrap !important;
-	width: 1px !important;
-	visibility: hidden !important;
-}
-.screen-reader-response {
-	display: none !important;
-}
 .full {
 	min-height: 100vh;
 	background: gray;
@@ -365,7 +350,6 @@
 		}
 	}
 }
-//====================================================================================================
 .icon-menu {
 	display: none;
 	@media (max-width: $tablet) {

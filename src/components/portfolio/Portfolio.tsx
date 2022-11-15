@@ -12,9 +12,9 @@ import Select from "react-select";
 import { EffectFade, Lazy, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ButtonCircle from "../../common/ButtonCircle";
-import Popup from "../popup/Popup";
 import PortfolioInnerSlide from "./PortfolioInnerSlide";
 import styles from './portfolio.module.scss';
+import PopupSuccess from "../popup/PopupSuccess";
 
 type Props = {};
 
@@ -388,25 +388,7 @@ const Portfolio = (props: Props) => {
 					</Formik>
 				</div>
 			</div>
-			<Popup active={active} setActive={setActive}>
-				<div className="form__headline headline">
-					<h2 className="headline__title">Успешно!</h2>
-					<p className="headline__subtitle">
-						Спасибо за Ваше обращение. Менеджер свяжется с вами в
-						ближайшее время!
-					</p>
-				</div>
-				<div className="popup__button">
-					<button
-						type="button"
-						data-close
-						className="button button--large"
-						onClick={() => setActive(false)}
-					>
-						Закрыть
-					</button>
-				</div>
-			</Popup>
+			<PopupSuccess active={active} setActive={setActive} />
 		</section>
 	);
 };

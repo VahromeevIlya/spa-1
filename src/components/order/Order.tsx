@@ -9,8 +9,8 @@ import {
 } from "formik";
 import clsx from "clsx";
 import Tippy from "@tippyjs/react";
-import Popup from "../popup/Popup";
 import styles from './order.module.scss';
+import PopupSuccess from "../popup/PopupSuccess";
 
 export interface Values {
 	firstName: string;
@@ -163,25 +163,7 @@ const Order = (props: Props) => {
 							</Form>
 						)}
 					</Formik>
-					<Popup active={active} setActive={setActive}>
-						<div className="form__headline headline">
-							<h2 className="headline__title">Успешно!</h2>
-							<p className="headline__subtitle">
-								Спасибо за Ваше обращение. Менеджер свяжется с вами в
-								ближайшее время!
-							</p>
-						</div>
-						<div className="popup__button">
-							<button
-								type="button"
-								data-close
-								className="button button--large"
-								onClick={() => setActive(false)}
-							>
-								Закрыть
-							</button>
-						</div>
-					</Popup>
+					<PopupSuccess active={active} setActive={setActive} />
 				</div>
 			</div>
 		</section>

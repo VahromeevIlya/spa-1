@@ -18,7 +18,7 @@ const MenuMobileDown = ({ media }: MenuMobileDownProps) => {
 						8 (4922) 42-12-83
 					</a>
 					{media <= Media.MOBILE && <ButtonHeader setActive={setActive}  />}
-					{/*<PopupCallback active={active} setActive={setActive}/>*/}
+					<PopupCallback active={active} setActive={setActive}/>
 				</div>
 			</div>
 		</div>
