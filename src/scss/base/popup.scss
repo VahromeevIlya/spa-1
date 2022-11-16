@@ -61,10 +61,7 @@ body.popup-show::after {
 	overflow: auto;
 	pointer-events: auto;
 }
-.popup_show .popup__content {
-	visibility: visible;
-	transform: scale(1);
-}
+
 .popup__wrapper {
 	display: flex;
 	flex-direction: column;
@@ -77,8 +74,11 @@ body.popup-show::after {
 	align-items: center;
 }
 .popup__content {
-	visibility: hidden;
-	transform: scale(0);
+
+	.popup_hide &{
+		visibility: hidden;
+		transform: scale(0);
+	}
 	transition: transform 0.3s ease 0s;
 	background-color: white;
 	padding: rem(24) rem(24) rem(60);
@@ -88,4 +88,8 @@ body.popup-show::after {
 	.lock & {
 		visibility: visible;
 	}
+}
+.popup_show .popup__content {
+	visibility: visible;
+	transform: scale(1);
 }

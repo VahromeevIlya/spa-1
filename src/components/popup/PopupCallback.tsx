@@ -3,7 +3,9 @@ import clsx from "clsx";
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import React from "react";
 import { PhoneInput, validateFrom1, Values } from "../order/Order";
+import { SimpleAnimatedModal } from "../SimpleAnimatedModal";
 import Popup from "./Popup";
+
 
 type Props = {
 	active: boolean;
@@ -12,7 +14,7 @@ type Props = {
 
 const PopupCallback = ({ active, setActive }: Props) => {
 	return (
-		<Popup active={active} setActive={setActive}>
+		<SimpleAnimatedModal opened={active} onClose={() => setActive(false)}>
 			<Formik
 				initialValues={{
 					firstName: "",
@@ -114,7 +116,7 @@ const PopupCallback = ({ active, setActive }: Props) => {
 					</Form>
 				)}
 			</Formik>
-		</Popup>
+		</SimpleAnimatedModal>
 	);
 };
 

@@ -10,7 +10,7 @@ const Home = (props: Props) => {
 		<About/>
 		<Order/>
 		<Team/>
-		<Portfolio/>
+		{/*<Portfolio/>*/}
 		<Keep/>
 		<Work/>
 		<Cost/>

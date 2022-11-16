@@ -9,7 +9,7 @@ type Props = {
 
 const Popup = ({ active, setActive, children }: Props) => {
 	return (
-		<div aria-hidden="true" className={clsx("popup", active && "popup_show")}>
+		<div aria-hidden="true" className={clsx("popup", active && "popup_show", !active && "popup_hide")}>
 			<div className="popup__wrapper">
 				<div className="popup__content">
 					<button type="button" onClick={() => setActive(false)} className="popup__close"></button>
