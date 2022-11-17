@@ -8,9 +8,13 @@ export const useMount = ({ opened }: SimpleAnimatedModalLayout) => {
   useEffect(() => {
     if (opened && !mounted) {
       setMounted(true);
+		document.documentElement.classList.add('lock');
+		document.body.style.marginRight = '17px';
     } else if (!opened && mounted) {
       setTimeout(() => {
         setMounted(false);
+		  document.documentElement.classList.remove('lock');
+		  document.body.style.marginRight = '';
       }, ANIMATION_TIME);
     }
   }, [opened]);

@@ -74,7 +74,6 @@ body.popup-show::after {
 	align-items: center;
 }
 .popup__content {
-
 	.popup_hide &{
 		visibility: hidden;
 		transform: scale(0);

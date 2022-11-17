@@ -51,6 +51,7 @@ export const Layout = ({ onClose, children, opened }: SimpleAnimatedModalLayout)
         classNames={contentAnimation}
       >
         <div ref={contentRef} className={styles.content}>
+			 
           {children}
         </div>
       </CSSTransition>
