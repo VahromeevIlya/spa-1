@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { addPaddingRight } from "../../utils/addPaddingRight";
 import { ANIMATION_TIME } from "./Layout/const";
 import { SimpleAnimatedModalLayout } from "./Layout/types";
 
@@ -7,14 +8,14 @@ export const useMount = ({ opened }: SimpleAnimatedModalLayout) => {
 
   useEffect(() => {
     if (opened && !mounted) {
-      setMounted(true);
+		addPaddingRight(true);
 		document.documentElement.classList.add('lock');
-		document.body.style.marginRight = '17px';
+      setMounted(true);
     } else if (!opened && mounted) {
       setTimeout(() => {
         setMounted(false);
 		  document.documentElement.classList.remove('lock');
-		  document.body.style.marginRight = '';
+		  addPaddingRight(false);
       }, ANIMATION_TIME);
     }
   }, [opened]);

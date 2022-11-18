@@ -1,12 +1,12 @@
 import styles from './header.module.scss';
 
 type Props = {
-	setActive?: (bool: boolean) => void;
+	setOpened?: (bool: boolean) => void;
 };
-const ButtonHeader = ({ setActive }: Props) => {
+const ButtonHeader = ({ setOpened }: Props) => {
 	return (
 		<button
-			onClick={() => setActive && setActive(true)}
+			onClick={() => setOpened && setOpened(true)}
 			type="button"
 			className={`${styles.callback} _icon-phone-outline`}
 		>

@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import adaptive from "./adaptive/slice";
+import popup from "./popups/slice";
 export const store = configureStore({
 	reducer: {
-		adaptive
+		adaptive,
+		popup
 	},
 });
 

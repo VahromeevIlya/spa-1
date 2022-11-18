@@ -7,14 +7,13 @@ import { SimpleAnimatedModal } from "../SimpleAnimatedModal";
 import Popup from "./Popup";
 
 type Props = {
-	active: boolean;
-	setActive: (bool: boolean) => void;
+	opened: boolean;
+	setOpened: (bool: boolean) => void;
 };
 
-const PopupCallback = ({ active, setActive }: Props) => {
+const PopupCallback = ({ opened, setOpened }: Props) => {
 	return (
-		<SimpleAnimatedModal opened={active} onClose={() => setActive(false)}>
-			<button type="button" onClick={() => setActive(false)} className="popup__close"></button>
+		<SimpleAnimatedModal opened={opened} onClose={() => setOpened(false)}>
 			<div className="popup__body form form--dark">
 				<Formik
 					initialValues={{
@@ -28,10 +27,10 @@ const PopupCallback = ({ active, setActive }: Props) => {
 					) => {
 						setTimeout(() => {
 							setSubmitting(false);
-							setActive(true);
+							setOpened(true);
 							resetForm();
 							setTimeout(() => {
-								setActive(false);
+								setOpened(false);
 							}, 4000);
 						}, 1000);
 					}}

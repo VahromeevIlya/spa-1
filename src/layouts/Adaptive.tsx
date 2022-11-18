@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMediaState } from "../redux/adaptive/slice";
 import { Media } from "../redux/adaptive/types";
 import { Outlet } from "react-router-dom";
 import { Header, Footer, MenuMobileDown, MenuMobileUp } from "../components";
 import Rellax from "rellax";
-import Parallax from 'parallax-js';
+import Parallax from "parallax-js";
 type Props = {
 	media: number;
 };
@@ -88,23 +88,21 @@ const Adaptive = ({ media }: Props) => {
 	const medias = Object.entries(Media).filter(
 		(item) => typeof item[1] === "number"
 	);
-
 	const updateMedia = useCallback((number: number) => {
 		dispatch(setMediaState(number));
 	}, []);
-
 	const leafsRef = useRef<HTMLDivElement>(null);
 	const leafsArray: any = [];
+	const wrapperRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
 		new Rellax(".relax");
 		const leafs = leafsRef.current?.children;
-		if(leafs) {
-			Array.from(leafs).forEach(leaf => {
+		if (leafs) {
+			Array.from(leafs).forEach((leaf) => {
 				const obj = new Parallax(leaf as HTMLElement);
 				leafsArray.push(obj);
-			})
+			});
 		}
-		
 		const breakpoints = medias.map((item) =>
 			window.matchMedia(`(max-width: ${item[1]}em)`)
 		);
@@ -129,14 +127,14 @@ const Adaptive = ({ media }: Props) => {
 			breakpoints.forEach((item, index) => {
 				if (index > 0) item.removeListener(breakpointChecker);
 			});
-			if(leafsArray.length) {
+			if (leafsArray.length) {
 				leafsArray.forEach((obj: any) => obj.disable());
 			}
 		};
 	}, []);
 
 	return (
-		<div className="wrapper">
+		<div ref={wrapperRef} className="wrapper">
 			<Header media={media} />
 			<div className="leafs" ref={leafsRef}>
 				{leafs.map((leaf, index) => {

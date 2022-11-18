@@ -13,7 +13,7 @@ const Header = ({ media }: HeaderProps) => {
 	const toggleBurger = useCallback(() => {
 		htmlRef.current.classList.toggle("menu-open");
 	}, []);
-	const [active, setActive] = useState(false);
+	const [opened, setOpened] = useState(false);
 
 	return (
 		<header className={styles.root} data-scroll="400">
@@ -40,8 +40,8 @@ const Header = ({ media }: HeaderProps) => {
 							>
 								<span>8 (4922) 42-12-83</span>
 							</a>
-							{media > Media.MOBILE && <ButtonHeader setActive={setActive} />}
-							<PopupCallback active={active} setActive={setActive}/>
+							{media > Media.MOBILE && <ButtonHeader setOpened={setOpened} />}
+							<PopupCallback opened={opened} setOpened={setOpened}/>
 						</div>
 					</div>
 				</div>
