@@ -45,7 +45,7 @@ export const validateFrom1 = (values: any) => {
 };
 
 const Order = (props: Props) => {
-	const [active, setActive] = useState(false);
+	const [opened, setOpened] = useState(false);
 
 	return (
 		<section id="order" className={styles.section}>
@@ -69,10 +69,10 @@ const Order = (props: Props) => {
 						) => {
 							setTimeout(() => {
 								setSubmitting(false);
-								setActive(true);
+								setOpened(true);
 								resetForm();
 								setTimeout(() => {
-									setActive(false);
+									setOpened(false);
 								}, 4000);
 							}, 1000);
 						}}
@@ -163,7 +163,7 @@ const Order = (props: Props) => {
 							</Form>
 						)}
 					</Formik>
-					<PopupSuccess active={active} setActive={setActive} />
+					<PopupSuccess opened={opened} setOpened={setOpened} />
 				</div>
 			</div>
 		</section>

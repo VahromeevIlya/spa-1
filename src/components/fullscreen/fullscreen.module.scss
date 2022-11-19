@@ -31,7 +31,7 @@
 		width: 100%;
 		min-height: 60vh;
 		padding: rem(80) 0;
-		&.swiper-slide-active {
+		&:global(.swiper-slide-active) {
 			pointer-events: auto;
 		}
 		@media (min-width: $mobile) {

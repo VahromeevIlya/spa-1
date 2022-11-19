@@ -1,31 +1,34 @@
+import { SimpleAnimatedModal } from "../SimpleAnimatedModal";
 import Popup from "./Popup";
 
 type Props = {
-	active: boolean;
-	setActive: (bool: boolean) => void;
+	opened: boolean;
+	setOpened: (bool: boolean) => void;
 };
 
-const PopupSuccess = ({ active, setActive }: Props) => {
+const PopupSuccess = ({ opened, setOpened }: Props) => {
 	return (
-		<Popup active={active} setActive={setActive}>
-			<div className="form__headline headline">
-				<h2 className="headline__title">Успешно!</h2>
-				<p className="headline__subtitle">
-					Спасибо за Ваше обращение. Менеджер свяжется с вами в ближайшее
-					время!
-				</p>
+		<SimpleAnimatedModal opened={opened} onClose={() => setOpened(false)}>
+			<div className="popup__body">
+				<div className="form__headline headline">
+					<h2 className="headline__title">Успешно!</h2>
+					<p className="headline__subtitle">
+						Спасибо за Ваше обращение. Менеджер свяжется с вами в
+						ближайшее время!
+					</p>
+				</div>
+				<div className="popup__button">
+					<button
+						type="button"
+						data-close
+						className="button button--large"
+						onClick={() => setOpened(false)}
+					>
+						Закрыть
+					</button>
+				</div>
 			</div>
-			<div className="popup__button">
-				<button
-					type="button"
-					data-close
-					className="button button--large"
-					onClick={() => setActive(false)}
-				>
-					Закрыть
-				</button>
-			</div>
-		</Popup>
+		</SimpleAnimatedModal>
 	);
 };
 
