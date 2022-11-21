@@ -1,0 +1,29 @@
+@use "sass:math";
+@import "../../utils.scss";
+
+.button {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding: rem(24) rem(40);
+	font-size: rem(17);
+	line-height: math.div(16, 17);
+	text-align: center;
+	color: #ffffff;
+	background: $red;
+	border-radius: rem(50);
+	transition: background 0.3s ease 0s;
+	.small {
+		font-size: rem(13);
+		line-height: math.div(12, 13);
+		padding: rem(15) rem(18);
+	}
+	.large {
+		padding: rem(28) rem(40);
+	} 
+	@media (any-hover: hover) {
+		&:hover {
+			background: #ac2d24;
+		}
+	}
+}

@@ -1,5 +1,6 @@
 import { SlideFullscreen } from "./Slides";
 import styles from './fullscreen.module.scss';
+import buttonStyles from '../../scss/base/forms/button.module.scss';
 
 const FullscreenSlide = ({ img, text, link }: SlideFullscreen) => {
 	return (
@@ -14,7 +15,7 @@ const FullscreenSlide = ({ img, text, link }: SlideFullscreen) => {
 						href={link}
 						target="_blank"
 						rel="noreferrer"
-						className={`button ${styles.button}`}
+						className={`${buttonStyles.button} ${styles.button}`}
 					>
 						Получить расчет
 					</a>

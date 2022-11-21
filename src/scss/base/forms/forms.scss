@@ -1,5 +1,4 @@
-//<FORM>
-// Снипет (HTML):
+
 .form {
 	&.submitting,
 	&.resetting
@@ -130,6 +129,17 @@
 		}
 	}
 }
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	&:focus {
+		outline: none;
+	}
+}
 //</FORM>
 .tippy-my {
 	color: white;
@@ -138,11 +148,9 @@
 }
 // <BUTTONS>
 // Снипет (HTML): btn
-@import "button";
-
-// <INPUTS>
-// Снипет (HTML): inp
-@import "input";
+button:disabled {
+	cursor: not-allowed;
+}
 
 // <CHECK>
 // Снипет (HTML): chk

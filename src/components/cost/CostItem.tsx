@@ -1,5 +1,5 @@
-import React from "react";
 import styles from './cost.module.scss';
+import buttonStyles from '../../scss/base/forms/button.module.scss';
 
 
 type Props = {
@@ -62,7 +62,7 @@ const CostItem = ({
 						<button
 							type="button"
 							data-popup="#callback"
-							className="button"
+							className={buttonStyles.button}
 						>
 							Заказать котельную
 						</button>

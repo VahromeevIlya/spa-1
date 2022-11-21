@@ -1,5 +1,4 @@
 import { SimpleAnimatedModal } from "../SimpleAnimatedModal";
-import Popup from "./Popup";
 
 type Props = {
 	opened: boolean;

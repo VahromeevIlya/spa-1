@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './order.module.scss';
 import PopupSuccess from "../popup/PopupSuccess";
-import FormCallback from "../forms/FormCallback";
+import FormCallback from "../forms/FormCallback/FormCallback";
 
 
 type Props = {};
@@ -21,7 +21,7 @@ const Order = (props: Props) => {
 			</div>
 			<div className="container">
 				<div className={styles.grid}>
-					<FormCallback opened={opened} setOpened={setOpened} classForm={styles.form} classHeadline="headline--light"/>
+					<FormCallback opened={opened} setOpened={setOpened} classForm={styles.form} classHeadline="light"/>
 					<PopupSuccess opened={opened} setOpened={setOpened} />
 				</div>
 			</div>

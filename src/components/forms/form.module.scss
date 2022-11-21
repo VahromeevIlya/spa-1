@@ -1,0 +1,105 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+@import "../../scss/fonts/icons.scss";
+
+.form {
+	&:global(.submitting),
+	&:global(.resetting) {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+	&--dark {
+		.input {
+			background: #f5f5f5;
+			border-color: #f5f5f5;
+			&::placeholder {
+				color: $mainColor;
+			}
+		}
+	}
+	.row {
+		display: grid;
+		gap: rem(16);
+		@include adaptiveValue("margin-bottom", 45, 30, $containerWidth, $minWidth, 1);
+	}
+	.line {
+		position: relative;
+	}
+	.form_button {
+		@include adaptiveValue("margin-bottom", 24, 30, $containerWidth, $minWidth, 1);
+		button {
+			width: 100%;
+		}
+	}
+	.agreement {
+		font-size: rem(10);
+		line-height: 144%;
+		text-align: center;
+		color: #a6a6a6;
+		a {
+			text-decoration: underline;
+			color: $red;
+		}
+	}
+}
+.error_icon {
+	position: absolute;
+	right: rem(16);
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 0;
+	&::after {
+		content: "\e905";
+		@extend %ic;
+		display: block;
+		font-size: rem(16);
+		color: $formError;
+		.popup & {
+			color: $formErrorPopup;
+		}
+	}
+}
+.tippy {
+	color: white;
+	padding: rem(10);
+	background: red;
+}
+.headline {
+	@include adaptiveValue("margin-bottom", 38, 30, $containerWidth, $minWidth, 1);
+	&:global(.light) {
+		.title {
+			color: white;
+		}
+	}
+	.title {
+		font-family: "DaysOne";
+		line-height: math.div(41, 32);
+		text-align: center;
+		color: $strong;
+		@include adaptiveValue("font-size", 32, 22, $containerWidth, $minWidth, 1);
+		&:not(:last-child) {
+			margin-bottom: rem(9);
+		}
+	}
+	.subtitle {
+		line-height: 144%;
+		text-align: center;
+		color: #a6a6a6;
+	}
+}
+//========================================================================================================================================================
+.input {
+	display: block;
+	width: 100%;
+	padding: rem(20) rem(40) rem(20) rem(30);
+	border: rem(1) solid #434343;
+	border-radius: rem(50);
+	background: transparent;
+	&.error {
+		border-color: $formError !important;
+	}
+}
+textarea.input {
+	resize: none;
+}
+//========================================================================================================================================================
