@@ -1,24 +1,41 @@
+import { Link } from "react-scroll";
+import { ReactScrollLinkProps } from "react-scroll/modules/components/Link";
+
+type Links = {
+	name: string;
+	to: string;
+};
+
+const settings: ReactScrollLinkProps = {
+	activeClass: "active",
+	spy: true,
+	smooth: true,
+	offset: -100,
+	duration: 500,
+	to: "#"
+};
+
+const links: Links[] = [
+	{ name: "Про нас", to: "about" },
+	{ name: "Заказать котельную", to: "order" },
+	{ name: "Команда", to: "team" },
+	{ name: "Портфолио", to: "portfolio" },
+	{ name: "Контакты", to: "#" },
+];
+
 const Menu = () => {
 	return (
-		<nav
-			className="menu__body"
-		>
+		<nav className="menu__body">
 			<ul className="menu__list">
-				<li className="menu-item">
-					<a href="#about">Про нас</a>
-				</li>
-				<li className="menu-item">
-					<a href="#order">Заказать котельную</a>
-				</li>
-				<li className="menu-item">
-					<a href="#team">Команда</a>
-				</li>
-				<li className="menu-item">
-					<a href="#portfolio">Портфолио</a>
-				</li>
-				<li className="menu-item">
-					<a href="/">Контакты</a>
-				</li>
+				{links.map((link) => {
+					return (
+						<li key={link.name}>
+							<Link {...settings} to={link.to}>
+								{link.name}
+							</Link>
+						</li>
+					);
+				})}
 			</ul>
 		</nav>
 	);

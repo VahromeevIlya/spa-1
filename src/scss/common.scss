@@ -410,9 +410,11 @@
 		li {
 			padding: rem(4);
 			a {
+				cursor: pointer;
 				line-height: math.div(15, 16);
-				.loaded & {
-					transition: color 0.3s ease 0s;
+				transition: color 0.3s ease 0s;
+				&.active{
+					color: $green;
 				}
 				@media (any-hover: hover) {
 					&:hover {
