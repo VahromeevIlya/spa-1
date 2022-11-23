@@ -4,13 +4,16 @@ import Menu from "./Menu";
 import ButtonHeader from "./ButtonHeader";
 import PopupCallback from "../popup/PopupCallback";
 import styles from "./header.module.scss";
+import { useSelector } from "react-redux";
+import { headerTheme } from "../../redux/adaptive/selectors";
+import clsx from "clsx";
 
 type HeaderProps = AdaptiveStateType;
 
 const Header = ({ media }: HeaderProps) => {
 	const htmlRef = useRef(document.documentElement);
 	const scrollBurgerMenuRef = useRef(0);
-	
+	const theme = useSelector(headerTheme);
 	const [opened, setOpened] = useState(false);
 	const [scroll, setScroll] = useState(false);
 	const headerRef = useRef<HTMLElement>(null);
@@ -76,7 +79,7 @@ const Header = ({ media }: HeaderProps) => {
 	}, []);
 
 	return (
-		<header ref={headerRef} className={styles.root} data-scroll="400">
+		<header ref={headerRef} className={clsx(styles.root,theme === 'dark' && styles.dark)} data-scroll="400">
 			<div className={styles.wrapper}>
 				<div className="container">
 					<div className={styles.grid}>

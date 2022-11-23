@@ -1,11 +1,14 @@
-import React from 'react'
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setHeaderTheme } from "../redux/adaptive/slice";
 
-type Props = {}
+const NotFound = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(setHeaderTheme("dark"));
+	}, []);
+	
+	return <div>NotFound</div>;
+};
 
-const NotFound = (props: Props) => {
-  return (
-	 <div>NotFound</div>
-  )
-}
-
-export default NotFound
+export default NotFound;

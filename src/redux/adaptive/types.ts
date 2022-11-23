@@ -1,5 +1,6 @@
 export type AdaptiveStateType = {
 	media: number;
+	header?: string;
 }
 export enum Media {
 	FULL = 1458 / 16,

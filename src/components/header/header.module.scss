@@ -16,6 +16,15 @@
 	width: 100%;
 	color: white;
 	@include adaptiveValue("padding-top", 28, 0, $containerWidth, 992, 1);
+	&.dark {
+		padding-top: 0;
+		& + :global(.page) {
+			padding-top: rem(81);
+		}
+		.wrapper {
+			background: $brown;
+		}
+	}
 	.wrapper {
 		padding: rem(16) 0;
 		:global(.menu-open) & {

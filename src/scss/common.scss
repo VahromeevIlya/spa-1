@@ -94,28 +94,6 @@
 		}
 	}
 }
-.headline {
-	&--light {
-		.headline__title {
-			color: white;
-		}
-	}
-	&__title {
-		font-family: "DaysOne";
-		line-height: math.div(41, 32);
-		text-align: center;
-		color: $strong;
-		@include adaptiveValue("font-size", 32, 22, $containerWidth, $minWidth, 1);
-		&:not(:last-child) {
-			margin-bottom: rem(9);
-		}
-	}
-	&__subtitle {
-		line-height: 144%;
-		text-align: center;
-		color: #a6a6a6;
-	}
-}
 .arrow {
 	pointer-events: auto;
 	&::before {
