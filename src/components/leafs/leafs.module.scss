@@ -1,0 +1,57 @@
+@use "sass:math";
+@import "../../scss/utils.scss";
+
+.leaf {
+	background: none;
+}
+.leafs {
+	@media (max-width: $tablet) {
+		display: none;
+	}
+	.item {
+		position: absolute;
+		z-index: 10;
+		&:global(.item--1) {
+			top: rem(800);
+			left: 55%;
+		}
+		&:global(.item--2) {
+			left: 6%;
+			top: rem(1380);
+		}
+		&:global(.item--3) {
+			right: 0;
+			top: rem(2100);
+		}
+		&:global(.item--4) {
+			left: 30%;
+			top: rem(2740);
+		}
+		&:global(.item--5) {
+			left: 28%;
+			top: rem(4000);
+		}
+		&:global(.item--6) {
+			right: 0;
+			top: rem(5100);
+		}
+		&:global(.item--7) {
+			left: 5%;
+			top: rem(5555);
+		}
+		&:global(.item--8) {
+			right: 2%;
+			top: rem(6700);
+			@media (max-width: $pc) {
+				top: rem(6200);
+			}
+		}
+		&:global(.item--9) {
+			left: 0;
+			top: rem(7040);
+			@media (max-width: $pc) {
+				top: rem(6500);
+			}
+		}
+	}
+}

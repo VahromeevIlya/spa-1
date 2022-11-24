@@ -2,10 +2,10 @@ import Tippy from "@tippyjs/react";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import clsx from "clsx";
 import { Props, Values } from "./types";
-import { validateFrom1 } from "./validation";
+import { validateForm } from "./validation";
 import { PhoneInput } from "./CustomFields";
 import styles from "../form.module.scss";
-import buttonStyles from '../../../scss/base/forms/button.module.scss';
+import buttonStyles from "../../../scss/base/forms/button.module.scss";
 
 const FormCallback = ({
 	opened,
@@ -14,27 +14,33 @@ const FormCallback = ({
 	classHeadline,
 	closeCallback,
 }: Props) => {
+	const initialValues: Values = {
+		firstName: "",
+		phone: "",
+	};
+
+	async function onSubmit (values: Values,props: FormikHelpers<Values>) {
+		const { setSubmitting, resetForm } = props;
+
+		await new Promise((r) => setTimeout(r, 1000));
+		alert(JSON.stringify(values, null, 2));
+
+		setSubmitting(false);
+		if (typeof closeCallback === "function") closeCallback();
+		setOpened(true);
+		resetForm();
+		setTimeout(() => {
+			setOpened(false);
+		}, 4000);
+	}
 	return (
 		<Formik
-			initialValues={{
-				firstName: "",
-				phone: "",
-			}}
-			validate={validateFrom1}
+			initialValues={initialValues}
+			validate={validateForm}
 			onSubmit={(
 				values: Values,
-				{ setSubmitting, resetForm }: FormikHelpers<Values>
-			) => {
-				setTimeout(() => {
-					setSubmitting(false);
-					if (typeof closeCallback === "function") closeCallback();
-					setOpened(true);
-					resetForm();
-					setTimeout(() => {
-						setOpened(false);
-					}, 4000);
-				}, 1000);
-			}}
+				helpers: FormikHelpers<Values>
+			) => onSubmit(values,helpers)}
 		>
 			{({ errors, touched, isSubmitting }) => (
 				<Form
@@ -55,9 +61,7 @@ const FormCallback = ({
 							<Field
 								className={clsx(
 									styles.input,
-									errors.firstName &&
-										touched.firstName &&
-										styles.error
+									errors.firstName && touched.firstName && styles.error
 								)}
 								name="firstName"
 								placeholder="Ваше имя*"
@@ -88,7 +92,10 @@ const FormCallback = ({
 						</div>
 					</div>
 					<div className={styles.form_button}>
-						<button type="submit" className={`${buttonStyles.button} ${buttonStyles.large}`}>
+						<button
+							type="submit"
+							className={`${buttonStyles.button} ${buttonStyles.large}`}
+						>
 							Отправить
 						</button>
 					</div>

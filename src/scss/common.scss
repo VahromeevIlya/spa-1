@@ -232,60 +232,6 @@
 		background: none;
 	}
 }
-.leaf {
-	background: none;
-}
-.leafs {
-	@media (max-width: $tablet) {
-		display: none;
-	}
-	&__item {
-		position: absolute;
-		z-index: 10;
-		&--1 {
-			top: rem(800);
-			left: 55%;
-		}
-		&--2 {
-			left: 6%;
-			top: rem(1380);
-		}
-		&--3 {
-			right: 0;
-			top: rem(2100);
-		}
-		&--4 {
-			left: 30%;
-			top: rem(2740);
-		}
-		&--5 {
-			left: 28%;
-			top: rem(4000);
-		}
-		&--6 {
-			right: 0;
-			top: rem(5100);
-		}
-		&--7 {
-			left: 5%;
-			top: rem(5555);
-		}
-		&--8 {
-			right: 2%;
-			top: rem(6700);
-			@media (max-width: $pc) {
-				top: rem(6200);
-			}
-		}
-		&--9 {
-			left: 0;
-			top: rem(7040);
-			@media (max-width: $pc) {
-				top: rem(6500);
-			}
-		}
-	}
-}
 .full {
 	min-height: 100vh;
 	background: gray;

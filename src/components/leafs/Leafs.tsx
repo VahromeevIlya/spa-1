@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import Rellax from "rellax";
 import Parallax from "parallax-js";
+import styles from './leafs.module.scss';
 
 const leafs = [
 	{
@@ -96,17 +97,17 @@ const Leafs = () => {
 	}, []);
 
 	return (
-		<div className="leafs" ref={leafsRef}>
+		<div className={styles.leafs} ref={leafsRef}>
 			{leafs.map((leaf, index) => {
 				return (
 					<div
 						key={index}
-						className={`leafs__item leafs__item--${index + 1}`}
+						className={`${styles.item} item--${index + 1}`}
 					>
 						<picture data-depth={leaf.depth ? leaf.depth : 0}>
 							<source srcSet={leaf.img.srcSet} type="image/webp" />
 							<img
-								className={`leaf relax leaf--${index + 1}`}
+								className={`${styles.leaf} relax`}
 								data-rellax-speed="2"
 								src={leaf.img.src}
 								alt=""

@@ -1,6 +1,7 @@
 @use "sass:math";
 @import "../../scss/utils.scss";
 
+
 .section {
 	position: relative;
 	@include adaptiveValue("margin-bottom", 110, 30, $containerWidth, $minWidth, 1);
@@ -34,7 +35,7 @@
 		@media (min-width: $mobile) {
 			grid-column: 2/3;
 		}
-		:global(.input) {
+		input {
 			color: white;
 		}
 	}

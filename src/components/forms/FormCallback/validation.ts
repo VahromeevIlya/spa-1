@@ -1,5 +1,8 @@
-export const validateFrom1 = (values: any) => {
-	const errors: any = {};
+import { FormikErrors } from "formik";
+import { Values } from "./types";
+
+export const validateForm = (values: Values) => {
+	const errors: FormikErrors<Values> = {};
 	const { firstName, phone } = values;
 
 	if (firstName.length < 2 && firstName.length > 0) {
