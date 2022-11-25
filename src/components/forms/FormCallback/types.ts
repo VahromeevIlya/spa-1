@@ -9,3 +9,7 @@ export type Props = {
 	classHeadline?: string;
 	closeCallback?: () => void;
 };
+export type ChangeInput =  React.ChangeEvent<HTMLInputElement> & CompositionEvent;
+export type PhoneInputProps = {
+	name: string
+}

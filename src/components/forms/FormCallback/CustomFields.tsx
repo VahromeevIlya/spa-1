@@ -1,28 +1,33 @@
 import clsx from "clsx";
 import { useField } from "formik";
+import { ChangeInput, PhoneInputProps } from "./types";
 import styles from "../form.module.scss";
 
-export const PhoneInput = (props: any) => {
+export const PhoneInput = (props: PhoneInputProps) => {
 	const [field, meta, helpers] = useField(props.name);
-	function handlePhoneKeyDown(event: any) {
-		let inputValue = event.target.value.replace(/\D/g, "");
-		if (event.keyCode == 8 && inputValue.length == 1) {
+	function handlePhoneKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+		const input = event.target as HTMLInputElement;
+		const value = input.value.replace(/\D/g, "");
+		if (event.code === "Backspace" && value.length === 1) {
 			helpers.setValue("", false);
 		}
 	}
-	function handlePhoneChange(event: any) {
-		const input = event.target;
-		let value: any = event.target.value,
-			inputNumbersValue = value.replace(/\D/g, ""),
+	function handlePhoneChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const _event = event as ChangeInput;
+		const input = event.target as HTMLInputElement;
+		const data = _event.data;
+		let value: string = input.value,
+			inputNumbersValue: string = value.replace(/\D/g, ""),
 			selectionStart = input.selectionStart,
-			formattedInputValue = "";
+			formattedInputValue: string = "";
 		if (!inputNumbersValue) {
 			return helpers.setValue("", false);
 		}
 
-		if (input.value.length != selectionStart) {
+
+		if (input.value.length !== selectionStart) {
 			// Editing in the middle of input, not last symbol
-			if (event.data && /\D/g.test(event.data)) {
+			if (data && /\D/g.test(data)) {
 				// Attempt to input non-numeric symbol
 				helpers.setValue(inputNumbersValue);
 			}
@@ -30,9 +35,9 @@ export const PhoneInput = (props: any) => {
 		}
 
 		if (["7", "8", "9"].indexOf(inputNumbersValue[0]) > -1) {
-			if (inputNumbersValue[0] == "9")
+			if (inputNumbersValue[0] === "9")
 				inputNumbersValue = "7" + inputNumbersValue;
-			let firstSymbols = inputNumbersValue[0] == "8" ? "8" : "+7";
+			let firstSymbols = inputNumbersValue[0] === "8" ? "8" : "+7";
 			helpers.setValue(firstSymbols + " ", false);
 			formattedInputValue = firstSymbols + " ";
 			if (inputNumbersValue.length > 1) {
@@ -65,11 +70,11 @@ export const PhoneInput = (props: any) => {
 
 		helpers.setValue(formattedInputValue, shouldValidate);
 	}
-	function handePhonePaste(event: any) {
-		let value: any = event.target.value;
-		let input = event.target,
-			inputNumbersValue = value.replace(/\D/g, "");
-		let pasted = event.clipboardData;
+	function handePhonePaste(event: React.ClipboardEvent<HTMLInputElement>) {
+		const input = event.target as HTMLInputElement;
+		const value: string = input.value;
+		const inputNumbersValue: string = value.replace(/\D/g, "");
+		const pasted = event.clipboardData;
 		if (pasted) {
 			let pastedText = pasted.getData("Text");
 			if (/\D/g.test(pastedText)) {
