@@ -239,6 +239,10 @@
 	gap: rem(16);
 	padding-bottom: rem(52);
 	@include adaptiveValue("padding-top", 52, 38, $containerWidth, $minWidth, 1);
+	&:global(.submitting) {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 	&::before {
 		content: "";
 		position: absolute;

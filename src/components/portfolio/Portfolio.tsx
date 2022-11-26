@@ -1,9 +1,9 @@
 import { EffectFade, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import PortfolioForm from "../forms/PortfolioForm/PortfolioForm";
 import styles from "./portfolio.module.scss";
 import PortfolioInnerSlider from "./PortfolioInnerSlider";
 import PortfolioTop from "./PortfolioTop";
-import PortfolioForm from "./PortfolioForm";
 import { PortfolioSlides } from "./Slides";
 
 type Props = {};
@@ -47,7 +47,11 @@ const Portfolio = (props: Props) => {
 					);
 				})}
 			</Swiper>
-			<PortfolioForm />
+			<div className="container">
+				<div className={styles.form_shell}>
+					<PortfolioForm/>
+				</div>
+			</div>
 		</section>
 	);
 };
