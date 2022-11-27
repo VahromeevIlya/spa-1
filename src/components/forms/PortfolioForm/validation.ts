@@ -5,12 +5,13 @@ export const validateForm = (values: Values) => {
 	const errors: FormikErrors<Values> = {};
 	const { select, checked } = values;
 
-	if(window.innerWidth < 767.98) {
-		if (select === null || select.length === 0 ) {
+	if (window.innerWidth < 767.98) {
+		console.log(select);
+		if (!select || select.length === 0) {
 			errors.select = "Выберите минимум 1 тип";
 		}
 	} else {
-		if (checked.length === 0 ) {
+		if (checked.length === 0) {
 			errors.checked = "Выберите минимум 1 тип";
 		}
 	}

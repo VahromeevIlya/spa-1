@@ -1,27 +1,28 @@
 import clsx from "clsx";
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
+import { ErrorMessage, Form, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import buttonStyles from "../../../scss/base/forms/button.module.scss";
 import PopupSuccess from "../../popup/PopupSuccess";
-import { Values } from "./types";
-import styles from '../../portfolio/portfolio.module.scss';
+import { Select, Values } from "./types";
+import styles from "../../portfolio/portfolio.module.scss";
 import { MyCheckbox, SelectField } from "./CustomFields";
 import { validateForm } from "./validation";
-type Props = {};
 
-
-export const options = [
+export const options: Select[] = [
 	{ value: "Gas", label: "Газовая" },
 	{ value: "Solid fuel", label: "Твердотопливная" },
 	{ value: "Diesel", label: "Дизельная" },
 ];
 
+const initialValues: Values = {
+	select: '',
+	checked: [],
+};
 
-
-const PortfolioForm = (props: Props) => {
+const PortfolioForm = () => {
 	const [opened, setOpened] = useState(false);
 
-	async function onSubmit (values: Values,props: FormikHelpers<Values>) {
+	async function onSubmit(values: Values, props: FormikHelpers<Values>) {
 		const { setSubmitting, resetForm } = props;
 
 		await new Promise((r) => setTimeout(r, 1000));
@@ -38,17 +39,13 @@ const PortfolioForm = (props: Props) => {
 	return (
 		<>
 			<Formik
-				initialValues={{
-					select: null,
-					checked: [],
-				}}
+				initialValues={initialValues}
 				validate={validateForm}
-				onSubmit={(
-					values: Values,
-					helpers: FormikHelpers<Values>
-				) => onSubmit(values,helpers)}
+				onSubmit={(values: Values, helpers: FormikHelpers<Values>) =>
+					onSubmit(values, helpers)
+				}
 			>
-				{({ errors, touched, isSubmitting }) => (
+				{({ isSubmitting }) => (
 					<Form
 						className={clsx(styles.form, isSubmitting && "submitting")}
 					>
@@ -74,18 +71,26 @@ const PortfolioForm = (props: Props) => {
 										Выберите тип котельной:
 									</div>
 									<div className={styles.form_checkboxes}>
-										<MyCheckbox value="Газовая" name="checked">Газовая</MyCheckbox>
-										<MyCheckbox value="Твердотопливная" name="checked">
+										<MyCheckbox value="Газовая" name="checked">
+											Газовая
+										</MyCheckbox>
+										<MyCheckbox
+											value="Твердотопливная"
+											name="checked"
+										>
 											Твердотопливная
 										</MyCheckbox>
 										<MyCheckbox value="Дизельная" name="checked">
 											Дизельная
 										</MyCheckbox>
 									</div>
-									<ErrorMessage name="checked" />
+									<ErrorMessage name="checked">
+										{(msg) => (
+											<div className={styles.error}>{msg}</div>
+										)}
+									</ErrorMessage>
 									<div className={styles.form_select}>
 										<SelectField name="select" />
-										<ErrorMessage name="select" />
 									</div>
 								</div>
 								<div className={styles.form_line}>

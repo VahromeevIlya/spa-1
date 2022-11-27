@@ -1,33 +1,44 @@
 import { useField } from "formik";
 import Select from "react-select";
 import { options } from "./PortfolioForm";
+import { FormCallbackProps } from "./types";
+import styles from "../../portfolio/portfolio.module.scss";
 
-export const SelectField = (props: any) => {
+export const SelectField = (props: FormCallbackProps) => {
 	const [field, state, { setValue, setTouched }] = useField(props.name);
 	const onChange = (value: any) => {
 		setValue(value);
 	};
+	const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+		setTouched(true, !state.touched);
+	};
+
 	return (
-		<Select
-			options={options}
-			{...props}
-			value={state?.value}
-			isMulti
-			onChange={onChange}
-			onBlur={setTouched}
-			styles={{
-				control: (baseStyles, state) => ({
-					...baseStyles,
-					marginTop: "20px",
-					minHeight: "60px",
-					borderRadius: "100px",
-					padding: "0 20px",
-				}),
-			}}
-		/>
+		<>
+			<Select
+				options={options}
+				{...props}
+				value={field.value}
+				isMulti
+				onChange={onChange}
+				onBlur={onBlur}
+				styles={{
+					control: (baseStyles, state) => ({
+						...baseStyles,
+						marginTop: "20px",
+						minHeight: "60px",
+						borderRadius: "100px",
+						padding: "0 20px",
+					}),
+				}}
+			/>
+			{state.touched && state.error && (
+				<div className={styles.error}>{state.error}</div>
+			)}
+		</>
 	);
 };
-export const MyCheckbox = ({ children, ...props }: any) => {
+export const MyCheckbox = ({ children, ...props }: FormCallbackProps) => {
 	const [field, meta, { setValue, setTouched }] = useField({
 		...props,
 		type: "checkbox",
