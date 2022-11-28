@@ -44,7 +44,7 @@ body {
 .menu-open body {
 	footer,
 	section,
-	& > div:not(.wrapper, .popup,#root),
+	& > div:not(.wrapper, .portal,#root),
 	& .wrapper > div:not(header, .page, .menu-mobile-down),
 	& .page > div:not(.menu-mobile-up),
 	& hr {

@@ -1,11 +1,11 @@
-const ELEMENTS: HTMLElement[] = [];
-const HEADER = document.querySelector("header");
-const BODY = document.body;
-
-HEADER && ELEMENTS.push(HEADER);
-ELEMENTS.push(BODY);
-
 export const addPaddingRight = (add: boolean) => {
+	const ELEMENTS: HTMLElement[] = [];
+	const HEADER = document.querySelector("header > div") as HTMLElement;
+	const BODY = document.body;
+
+	HEADER && ELEMENTS.push(HEADER);
+	ELEMENTS.push(BODY);
+
 	if (add) {
 		const wrapper = document.querySelector(".wrapper") as HTMLElement;
 		if (wrapper) {

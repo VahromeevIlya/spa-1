@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Menu from "../header/Menu";
+import PopupCallback from "../popup/PopupCallback";
 import styles from './footer.module.scss';
 
 type FooterProps = {};
 
 const Footer = (props: FooterProps) => {
+	const [opened, setOpened] = useState(false);
 	return (
 		<footer className={styles.root}>
 			<div className={`${styles.background} ibg`}>
@@ -27,7 +29,7 @@ const Footer = (props: FooterProps) => {
 							</a>
 							<button
 								type="button"
-								data-popup="#callback"
+								onClick={() => setOpened(true)}
 								className={`${styles.callback} _icon-phone-outline`}
 							>
 								<span>ПЕРЕЗВОНИТЕ МНЕ</span>
@@ -65,6 +67,7 @@ const Footer = (props: FooterProps) => {
 					</div>
 				</div>
 			</div>
+			<PopupCallback opened={opened} setOpened={setOpened} />
 		</footer>
 	);
 };

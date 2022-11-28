@@ -10,6 +10,7 @@ type Props = {
 	equipment: string;
 	description: string;
 	price: string;
+	setOpened: (b: boolean) => void;
 };
 
 const CostItem = ({
@@ -20,6 +21,7 @@ const CostItem = ({
 	equipment,
 	description,
 	price,
+	setOpened
 }: Props) => {
 	return (
 		<div className={styles.card}>
@@ -61,7 +63,7 @@ const CostItem = ({
 					<div className={styles.button}>
 						<button
 							type="button"
-							data-popup="#callback"
+							onClick={() => setOpened(true)}
 							className={buttonStyles.button}
 						>
 							Заказать котельную

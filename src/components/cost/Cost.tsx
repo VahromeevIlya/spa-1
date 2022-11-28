@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import CostItem from "./CostItem";
 import styles from './cost.module.scss';
+import PopupCallback from "../popup/PopupCallback";
 type Props = {};
 
 
@@ -54,6 +55,7 @@ const CostItems = [
 
 
 const Cost = (props: Props) => {
+	const [opened, setOpened] = useState(false);
 	return (
 		<section className={styles.section}>
 			<div className="container">
@@ -82,11 +84,12 @@ const Cost = (props: Props) => {
 				<div className={styles.cards}>
 					<div className={styles.grid}>
 						{CostItems.map((item,index) => {
-							return <CostItem key={index} {...item}/>
+							return <CostItem key={index} setOpened={setOpened} {...item}/>
 						})}
 					</div>
 				</div>
 			</div>
+			<PopupCallback opened={opened} setOpened={setOpened} />
 		</section>
 	);
 };

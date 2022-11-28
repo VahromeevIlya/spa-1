@@ -6,7 +6,11 @@ type Props = {
 };
 
 const Portal = ({ children }: Props) => {
-	const [container] = useState(() => document.createElement("div"));
+	const [container] = useState(() => {
+		const element = document.createElement("div");
+		element.classList.add("portal");
+		return element;
+	});
 
 	useEffect(() => {
 		document.body.appendChild(container);

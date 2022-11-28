@@ -77,7 +77,7 @@
 		}
 		@media (max-width: $tablet) {
 			padding-right: 0 !important;
-			&:not(.mobile),
+			&:not(:global(.mobile)),
 			&::before {
 				display: none;
 			}

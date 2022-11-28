@@ -235,7 +235,7 @@
 	z-index: 2;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	align-items: center;
+	align-items: start;
 	gap: rem(16);
 	padding-bottom: rem(52);
 	@include adaptiveValue("padding-top", 52, 38, $containerWidth, $minWidth, 1);

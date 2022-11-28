@@ -1,7 +1,7 @@
 import styles from './header.module.scss';
 
 type Props = {
-	setOpened?: (bool: boolean) => void;
+	setOpened?: (b: boolean) => void;
 };
 const ButtonHeader = ({ setOpened }: Props) => {
 	return (

@@ -23,6 +23,10 @@ const links: Links[] = [
 	{ name: "Контакты", to: "#" },
 ];
 
+type Props = {
+	toggleBurger?: () => void;
+}
+
 const Menu = () => {
 	return (
 		<nav className="menu__body">

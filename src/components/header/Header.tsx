@@ -35,7 +35,6 @@ const Header = ({ media }: HeaderProps) => {
 		
 		} else {
 			scrollBurgerMenuRef.current = document.documentElement.scrollTop;
-			
 			htmlRef.current.classList.add("menu-open");
 			window.scrollTo(0, 0);
 		}
@@ -79,7 +78,7 @@ const Header = ({ media }: HeaderProps) => {
 	}, []);
 
 	return (
-		<header ref={headerRef} className={clsx(styles.root,theme === 'dark' && styles.dark)} data-scroll="400">
+		<header ref={headerRef} className={clsx(styles.root,theme === 'dark' && styles.dark)}>
 			<div className={styles.wrapper}>
 				<div className="container">
 					<div className={styles.grid}>
