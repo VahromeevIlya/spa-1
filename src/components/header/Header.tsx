@@ -7,12 +7,11 @@ import styles from "./header.module.scss";
 import { useSelector } from "react-redux";
 import { headerTheme } from "../../redux/adaptive/selectors";
 import clsx from "clsx";
+import { toggleBurger } from "../../utils/toggleBurger";
 
 type HeaderProps = AdaptiveStateType;
 
 const Header = ({ media }: HeaderProps) => {
-	const htmlRef = useRef(document.documentElement);
-	const scrollBurgerMenuRef = useRef(0);
 	const theme = useSelector(headerTheme);
 	const [opened, setOpened] = useState(false);
 	const [scroll, setScroll] = useState(false);
@@ -21,25 +20,7 @@ const Header = ({ media }: HeaderProps) => {
 	const startRef = useRef(400);
 	const scrollDirectionRef = useRef(0);
 
-	const toggleBurger = useCallback(() => {
-		if(htmlRef.current.classList.contains('menu-open')) {
-			
-			headerRef.current?.classList.add("_no-transform");
-			htmlRef.current.classList.remove("menu-open");
-			setTimeout(() => {
-				window.scrollTo(0, scrollBurgerMenuRef.current);
-			},50)
-			setTimeout(function () {
-				headerRef.current?.classList.remove("_no-transform");
-			}, 2000);
-		
-		} else {
-			scrollBurgerMenuRef.current = document.documentElement.scrollTop;
-			htmlRef.current.classList.add("menu-open");
-			window.scrollTo(0, 0);
-		}
-		
-	}, []);
+	
 	useEffect(() => {
 		function windowScrollHeader() {
 			const scrollTop = window.scrollY;
@@ -93,7 +74,7 @@ const Header = ({ media }: HeaderProps) => {
 							<img src="img/logo.svg" alt="Логотип" />
 						</a>
 						<div className={`${styles.menu} menu`}>
-							{media >= Media.DESKTOP && <Menu />}
+							{media >= Media.TABLET && <Menu />}
 						</div>
 						<div className={styles.actions}>
 							<a

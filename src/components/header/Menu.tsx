@@ -1,11 +1,14 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-scroll";
 import { ReactScrollLinkProps } from "react-scroll/modules/components/Link";
+import { mediaSize } from "../../redux/adaptive/selectors";
+import { Media } from "../../redux/adaptive/types";
+import { toggleBurger } from "../../utils/toggleBurger";
 
 type Links = {
 	name: string;
 	to: string;
 };
-
 const settings: ReactScrollLinkProps = {
 	activeClass: "active",
 	spy: true,
@@ -14,7 +17,6 @@ const settings: ReactScrollLinkProps = {
 	duration: 500,
 	to: "#"
 };
-
 const links: Links[] = [
 	{ name: "Про нас", to: "about" },
 	{ name: "Заказать котельную", to: "order" },
@@ -23,18 +25,20 @@ const links: Links[] = [
 	{ name: "Контакты", to: "#" },
 ];
 
-type Props = {
-	toggleBurger?: () => void;
-}
-
 const Menu = () => {
+	const media: number = useSelector(mediaSize);
+	const handleClick = () => {
+		if(media <= Media.TABLET) {
+			toggleBurger()
+		}
+	};
 	return (
 		<nav className="menu__body">
 			<ul className="menu__list">
 				{links.map((link) => {
 					return (
 						<li key={link.name}>
-							<Link {...settings} to={link.to}>
+							<Link onClick={handleClick} {...settings} to={link.to}>
 								{link.name}
 							</Link>
 						</li>

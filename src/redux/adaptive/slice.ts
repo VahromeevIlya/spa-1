@@ -4,6 +4,7 @@ import { AdaptiveStateType } from "./types";
 const initialState: AdaptiveStateType = {
 	media: window.innerWidth / 16,
 	header: "light",
+	toggleBurger: false,
 };
 
 export const adaptiveSlice = createSlice({
@@ -16,10 +17,13 @@ export const adaptiveSlice = createSlice({
 		setHeaderTheme(state, action: PayloadAction<string>) {
 			state.header = action.payload;
 		},
+		toggleBurgerMenu(state) {
+			state.toggleBurger = !state.toggleBurger;
+		}
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { setMediaState, setHeaderTheme } = adaptiveSlice.actions;
+export const { setMediaState, setHeaderTheme,toggleBurgerMenu } = adaptiveSlice.actions;
 
 export default adaptiveSlice.reducer;
