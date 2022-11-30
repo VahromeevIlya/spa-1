@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface Values {
-	select: string | Select[];
+	select: string[];
 	checked: [] | string[];
 }
 export type Select = {

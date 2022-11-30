@@ -10,15 +10,14 @@ export const SelectField = (props: FormCallbackProps) => {
 		setValue(value);
 	};
 	const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-		setTouched(true, !state.touched);
+		setTouched(true);
 	};
-
+	
 	return (
 		<>
 			<Select
 				options={options}
-				{...props}
-				value={field.value}
+				name={props.name}
 				isMulti
 				onChange={onChange}
 				onBlur={onBlur}

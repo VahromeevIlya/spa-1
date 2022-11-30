@@ -6,8 +6,9 @@ export const validateForm = (values: Values) => {
 	const { select, checked } = values;
 
 	if (window.innerWidth < 767.98) {
-		console.log(select);
+		
 		if (!select || select.length === 0) {
+			console.log(select);
 			errors.select = "Выберите минимум 1 тип";
 		}
 	} else {
