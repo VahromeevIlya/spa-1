@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/spa-1/static/css/main.37ee5853.css",
+    "main.js": "/spa-1/static/js/main.8129fc85.js",
+    "static/media/DaysOne-Regular.woff2": "/spa-1/static/media/DaysOne-Regular.a0d71b257989b6b2bbc6.woff2",
+    "static/media/GothamPro-Medium.woff2": "/spa-1/static/media/GothamPro-Medium.475a0173f7022f67dc86.woff2",
+    "static/media/GothamPro-Regular.woff2": "/spa-1/static/media/GothamPro-Regular.8f37cdeeb8c95ac37db3.woff2",
+    "static/media/GothamPro-Bold.woff2": "/spa-1/static/media/GothamPro-Bold.ad94330d291c377feb86.woff2",
+    "static/media/GothamPro-Black.woff2": "/spa-1/static/media/GothamPro-Black.39d3c1c39a14e1bb4e7f.woff2",
+    "static/media/olimp.svg": "/spa-1/static/media/olimp.b929ed0a2752c3eab921.svg",
+    "static/media/icons.woff2": "/spa-1/static/media/icons.131231034581303f59bf.woff2",
+    "static/media/loading.svg": "/spa-1/static/media/loading.2250455148b7e20e67ad.svg",
+    "index.html": "/spa-1/index.html",
+    "main.37ee5853.css.map": "/spa-1/static/css/main.37ee5853.css.map",
+    "main.8129fc85.js.map": "/spa-1/static/js/main.8129fc85.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.37ee5853.css",
+    "static/js/main.8129fc85.js"
+  ]
+}
