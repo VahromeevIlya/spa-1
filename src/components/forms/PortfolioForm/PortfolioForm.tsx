@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
+import { ErrorMessage, Form, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import buttonStyles from "../../../scss/base/forms/button.module.scss";
 import PopupSuccess from "../../popup/PopupSuccess";
@@ -7,7 +7,6 @@ import { Select, Values } from "./types";
 import styles from "../../portfolio/portfolio.module.scss";
 import { MyCheckbox, SelectField } from "./CustomFields";
 import { validateForm } from "./validation";
-import CustomSelect from "./CustomSelect";
 
 export const options: Select[] = [
 	{ value: "Gas", label: "Газовая" },
@@ -42,6 +41,7 @@ const PortfolioForm = () => {
 			<Formik
 				initialValues={initialValues}
 				validate={validateForm}
+				validateOnBlur={false}
 				onSubmit={(values: Values, helpers: FormikHelpers<Values>) =>
 					onSubmit(values, helpers)
 				}
@@ -91,15 +91,7 @@ const PortfolioForm = () => {
 										)}
 									</ErrorMessage>
 									<div className={styles.form_select}>
-										<Field
-											className="custom-select"
-											name="select"
-											options={options}
-											component={CustomSelect}
-											placeholder="Select..."
-											isMulti={true}
-										/>
-										{/*<SelectField name="select" />*/}
+										<SelectField name="select" />
 									</div>
 								</div>
 								<div className={styles.form_line}>

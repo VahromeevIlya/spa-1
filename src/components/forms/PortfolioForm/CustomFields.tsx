@@ -18,6 +18,7 @@ export const SelectField = (props: FormCallbackProps) => {
 			<Select
 				options={options}
 				name={props.name}
+				value={field.value}
 				isMulti
 				onChange={onChange}
 				onBlur={onBlur}
