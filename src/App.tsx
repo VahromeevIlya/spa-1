@@ -10,7 +10,7 @@ function App() {
 	const media: number = useSelector(mediaSize);
 	return (
 		<Routes>
-			<Route path="/" element={<Adaptive media={media} />}>
+			<Route path="/spa-1/" element={<Adaptive media={media} />}>
 					<Route path="" element={<Home/>}/>
 					<Route path="*" element={<NotFound/>}/>
 			</Route>
