@@ -21,7 +21,7 @@ const Footer = (props: FooterProps) => {
 							<img src="img/logo.svg" alt="Логотип" />
 						</a>
 						<div className={`${styles.menu} menu`}>
-							<Menu/>
+							<Menu noToggle/>
 						</div>
 						<div className={styles.actions}>
 							<a href="tel:8 (4922) 42-12-83" className={styles.phone}>

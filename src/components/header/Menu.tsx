@@ -15,7 +15,7 @@ const settings: ReactScrollLinkProps = {
 	smooth: true,
 	offset: -100,
 	duration: 500,
-	to: "#"
+	to: "#",
 };
 const links: Links[] = [
 	{ name: "Про нас", to: "about" },
@@ -25,11 +25,16 @@ const links: Links[] = [
 	{ name: "Контакты", to: "#" },
 ];
 
-const Menu = () => {
+type Props = {
+	noToggle?: boolean;
+};
+
+const Menu = ({ noToggle }: Props) => {
 	const media: number = useSelector(mediaSize);
 	const handleClick = () => {
-		if(media <= Media.TABLET) {
-			toggleBurger()
+		if (noToggle) return;
+		if (media <= Media.TABLET) {
+			toggleBurger();
 		}
 	};
 	return (
